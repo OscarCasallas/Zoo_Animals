@@ -164,7 +164,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
             String name = nameInput.getText().trim();
             double weight;
             LocalDate birthDate;
-            String finType;
+            String preferredFood;
             double swimSpeed;
             Aquatic aquatic;
 
@@ -178,10 +178,10 @@ public class GUICreateAquatic extends javax.swing.JFrame {
 
             weight = Double.parseDouble(weightInput.getText().trim());
             birthDate = LocalDate.parse(birthDateInput.getText().trim());  // formato esperado: YYYY-MM-DD
-            finType = preferredFoodInput.getText().trim();
+            preferredFood = preferredFoodInput.getText().trim();
             swimSpeed = Double.parseDouble(swimSpeedInput.getText().trim());
 
-            aquatic = new Aquatic(id, name, weight, birthDate, finType, swimSpeed);
+            aquatic = new Aquatic(id, name, weight, birthDate, preferredFood, swimSpeed);
 
             aquaticService.add(aquatic);
 

@@ -6,9 +6,9 @@ public class Aquatic extends Animal {
     private String preferredFood;
     private double swimSpeedKmh;
     
-    public Aquatic(String id, String name, double weightKg, LocalDate birthDate, String finType, double swimSpeedKmh) {
+    public Aquatic(String id, String name, double weightKg, LocalDate birthDate, String preferredFood, double swimSpeedKmh) {
         super(id, name, weightKg, birthDate);
-        this.preferredFood = finType;
+        this.preferredFood = preferredFood;
         this.swimSpeedKmh = swimSpeedKmh;
     }
 
@@ -16,7 +16,7 @@ public class Aquatic extends Animal {
         return preferredFood;
     }
 
-    public void setPreferredFood(String finType) {
+    public void setPreferredFood(String preferredFood) {
         this.preferredFood = preferredFood;
     }
 
