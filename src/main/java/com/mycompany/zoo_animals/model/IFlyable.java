@@ -2,12 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.service;
+package com.mycompany.zoo_animals.model;
 
-/**
- *
- * @author HP Core i5
- */
-public class IAnimalService {
-    
+public interface IFlyable {
+    void fly();
+    double getMaxAltitude();
 }
