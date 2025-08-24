@@ -33,7 +33,7 @@ public class GUIGetAquatic extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Identificador", "Nombre", "Peso", "Fecha de nacimiento", "Tipo de aletas", "Velocidad de nado (km/h)"
+                "Identificador", "Nombre", "Peso", "Fecha de nacimiento", "Alimentación preferida", "Velocidad de nado (km/h)"
             }
         ) {
             Class[] types = new Class [] {
@@ -112,7 +112,7 @@ public class GUIGetAquatic extends javax.swing.JFrame {
                 a.getName(),
                 a.getWeightKg(),
                 a.getBirthDate(),
-                a.getFinType(),
+                a.getPreferredFood(),
                 a.getSwimSpeedKmh()
             });
         }

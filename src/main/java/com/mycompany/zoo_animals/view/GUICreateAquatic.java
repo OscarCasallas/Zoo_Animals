@@ -29,7 +29,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
         nameInput = new javax.swing.JTextField();
         weightInput = new javax.swing.JTextField();
         birthDateInput = new javax.swing.JTextField();
-        finTypeInput = new javax.swing.JTextField();
+        preferredFoodInput = new javax.swing.JTextField();
         swimSpeedInput = new javax.swing.JTextField();
         closeBtn = new javax.swing.JButton();
         addBtn = new javax.swing.JButton();
@@ -45,7 +45,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
 
         jLabel3.setText("Fecha de nacimiento");
 
-        jLabel4.setText("Tipo de aletas");
+        jLabel4.setText("Alimentación preferida");
 
         jLabel5.setText("Velocidad de nado (km/h)");
 
@@ -91,7 +91,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(birthDateInput)
-                            .addComponent(finTypeInput)))
+                            .addComponent(preferredFoodInput)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -135,7 +135,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(finTypeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(preferredFoodInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -169,7 +169,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
             Aquatic aquatic;
 
             if (id.isEmpty() || name.isEmpty() || weightInput.getText().trim().isEmpty() ||
-                birthDateInput.getText().trim().isEmpty() || finTypeInput.getText().trim().isEmpty() ||
+                birthDateInput.getText().trim().isEmpty() || preferredFoodInput.getText().trim().isEmpty() ||
                 swimSpeedInput.getText().trim().isEmpty()) {
 
                 JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -178,7 +178,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
 
             weight = Double.parseDouble(weightInput.getText().trim());
             birthDate = LocalDate.parse(birthDateInput.getText().trim());  // formato esperado: YYYY-MM-DD
-            finType = finTypeInput.getText().trim();
+            finType = preferredFoodInput.getText().trim();
             swimSpeed = Double.parseDouble(swimSpeedInput.getText().trim());
 
             aquatic = new Aquatic(id, name, weight, birthDate, finType, swimSpeed);
@@ -192,7 +192,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
             nameInput.setText("");
             weightInput.setText("");
             birthDateInput.setText("");
-            finTypeInput.setText("");
+            preferredFoodInput.setText("");
             swimSpeedInput.setText("");
 
         } catch (NumberFormatException nfe) {
@@ -213,7 +213,6 @@ public class GUICreateAquatic extends javax.swing.JFrame {
     private javax.swing.JButton addBtn;
     private javax.swing.JTextField birthDateInput;
     private javax.swing.JButton closeBtn;
-    private javax.swing.JTextField finTypeInput;
     private javax.swing.JTextField idInput;
     private javax.swing.JLabel idLabel;
     private javax.swing.JLabel jLabel1;
@@ -222,6 +221,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField nameInput;
+    private javax.swing.JTextField preferredFoodInput;
     private javax.swing.JTextField swimSpeedInput;
     private javax.swing.JTextField weightInput;
     // End of variables declaration//GEN-END:variables

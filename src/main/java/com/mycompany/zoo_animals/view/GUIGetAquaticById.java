@@ -44,7 +44,7 @@ public class GUIGetAquaticById extends javax.swing.JFrame {
         nameInput = new javax.swing.JTextField();
         weightInput = new javax.swing.JTextField();
         birthDateInput = new javax.swing.JTextField();
-        finTypeInput = new javax.swing.JTextField();
+        preferredFoodInput = new javax.swing.JTextField();
         swimSpeedInput = new javax.swing.JTextField();
         cleanBtn = new javax.swing.JButton();
 
@@ -79,7 +79,7 @@ public class GUIGetAquaticById extends javax.swing.JFrame {
 
         jLabel3.setText("Fecha de nacimiento");
 
-        jLabel4.setText("Tipo de aletas");
+        jLabel4.setText("Alimentación preferida");
 
         jLabel5.setText("Velocidad de nado (km/h)");
 
@@ -96,7 +96,7 @@ public class GUIGetAquaticById extends javax.swing.JFrame {
 
         birthDateInput.setEditable(false);
 
-        finTypeInput.setEditable(false);
+        preferredFoodInput.setEditable(false);
 
         swimSpeedInput.setEditable(false);
         swimSpeedInput.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +148,7 @@ public class GUIGetAquaticById extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(finTypeInput)
+                            .addComponent(preferredFoodInput)
                             .addComponent(birthDateInput))))
                 .addContainerGap())
         );
@@ -178,7 +178,7 @@ public class GUIGetAquaticById extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(finTypeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(preferredFoodInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -220,7 +220,7 @@ public class GUIGetAquaticById extends javax.swing.JFrame {
                 nameInput.setText(aquatic.getName());
                 weightInput.setText(String.valueOf(aquatic.getWeightKg()));
                 birthDateInput.setText(aquatic.getBirthDate().toString());
-                finTypeInput.setText(aquatic.getFinType());
+                preferredFoodInput.setText(aquatic.getPreferredFood());
                 swimSpeedInput.setText(String.valueOf(aquatic.getSwimSpeedKmh()));
 
                 javax.swing.JOptionPane.showMessageDialog(this,
@@ -247,7 +247,7 @@ public class GUIGetAquaticById extends javax.swing.JFrame {
         nameInput.setText("");
         weightInput.setText("");
         birthDateInput.setText("");
-        finTypeInput.setText("");
+        preferredFoodInput.setText("");
         swimSpeedInput.setText("");
     }
     private void nameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputActionPerformed
@@ -267,7 +267,6 @@ public class GUIGetAquaticById extends javax.swing.JFrame {
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton cleanBtn;
-    private javax.swing.JTextField finTypeInput;
     private javax.swing.JTextField idInput;
     private javax.swing.JLabel idLabel;
     private javax.swing.JLabel jLabel1;
@@ -276,6 +275,7 @@ public class GUIGetAquaticById extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField nameInput;
+    private javax.swing.JTextField preferredFoodInput;
     private javax.swing.JTextField searchInput;
     private javax.swing.JTextField swimSpeedInput;
     private javax.swing.JTextField weightInput;

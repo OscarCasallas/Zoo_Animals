@@ -40,7 +40,7 @@ public class AquaticService implements IAquaticService {
             existing.setName(updatedAquatic.getName());
             existing.setWeightKg(updatedAquatic.getWeightKg());
             existing.setBirthDate(updatedAquatic.getBirthDate());
-            existing.setFinType(updatedAquatic.getFinType());
+            existing.setPreferredFood(updatedAquatic.getPreferredFood());
             existing.setSwimSpeedKmh(updatedAquatic.getSwimSpeedKmh());
         });
     }

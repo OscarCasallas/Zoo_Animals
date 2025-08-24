@@ -39,8 +39,8 @@ public class GUIEditAquatic extends javax.swing.JFrame {
         birthDateInput.setEditable(editable);
         birthDateInput.setFocusable(editable);
 
-        finTypeInput.setEditable(editable);
-        finTypeInput.setFocusable(editable);
+        preferredFoodInput.setEditable(editable);
+        preferredFoodInput.setFocusable(editable);
 
         swimSpeedInput.setEditable(editable);
         swimSpeedInput.setFocusable(editable);
@@ -63,7 +63,7 @@ public class GUIEditAquatic extends javax.swing.JFrame {
         nameInput = new javax.swing.JTextField();
         weightInput = new javax.swing.JTextField();
         birthDateInput = new javax.swing.JTextField();
-        finTypeInput = new javax.swing.JTextField();
+        preferredFoodInput = new javax.swing.JTextField();
         swimSpeedInput = new javax.swing.JTextField();
         btnEdit = new javax.swing.JButton();
 
@@ -91,7 +91,7 @@ public class GUIEditAquatic extends javax.swing.JFrame {
 
         jLabel3.setText("Fecha de nacimiento");
 
-        jLabel4.setText("Tipo de aletas");
+        jLabel4.setText("Alimentación preferida");
 
         jLabel5.setText("Velocidad de nado (km/h)");
 
@@ -136,10 +136,6 @@ public class GUIEditAquatic extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEdit))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(5, 5, 5)
-                        .addComponent(swimSpeedInput, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(inputSearch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -160,9 +156,13 @@ public class GUIEditAquatic extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(birthDateInput))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(40, 40, 40)
-                        .addComponent(finTypeInput)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(swimSpeedInput)
+                            .addComponent(preferredFoodInput))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -191,7 +191,7 @@ public class GUIEditAquatic extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(finTypeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(preferredFoodInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -227,7 +227,7 @@ public class GUIEditAquatic extends javax.swing.JFrame {
                 nameInput.setText(aquatic.getName());
                 weightInput.setText(String.valueOf(aquatic.getWeightKg()));
                 birthDateInput.setText(aquatic.getBirthDate().toString());
-                finTypeInput.setText(aquatic.getFinType());
+                preferredFoodInput.setText(aquatic.getPreferredFood());
                 swimSpeedInput.setText(String.valueOf(aquatic.getSwimSpeedKmh()));
                 
                 setFieldsEditable(true);
@@ -272,7 +272,7 @@ public class GUIEditAquatic extends javax.swing.JFrame {
                 nameInput.getText().trim(),
                 Double.parseDouble(weightInput.getText().trim()),
                 java.time.LocalDate.parse(birthDateInput.getText().trim()),
-                finTypeInput.getText().trim(),
+                preferredFoodInput.getText().trim(),
                 Double.parseDouble(swimSpeedInput.getText().trim())
             );
 
@@ -295,7 +295,7 @@ public class GUIEditAquatic extends javax.swing.JFrame {
         nameInput.setText("");
         weightInput.setText("");
         birthDateInput.setText("");
-        finTypeInput.setText("");
+        preferredFoodInput.setText("");
         swimSpeedInput.setText("");
 
         setFieldsEditable(false);
@@ -306,7 +306,6 @@ public class GUIEditAquatic extends javax.swing.JFrame {
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JTextField finTypeInput;
     private javax.swing.JTextField idInput;
     private javax.swing.JLabel idLabel;
     private javax.swing.JTextField inputSearch;
@@ -316,6 +315,7 @@ public class GUIEditAquatic extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField nameInput;
+    private javax.swing.JTextField preferredFoodInput;
     private javax.swing.JTextField swimSpeedInput;
     private javax.swing.JTextField weightInput;
     // End of variables declaration//GEN-END:variables

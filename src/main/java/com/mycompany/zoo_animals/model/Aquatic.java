@@ -3,21 +3,21 @@ package com.mycompany.zoo_animals.model;
 import java.time.LocalDate;
 
 public class Aquatic extends Animal {
-    private String finType;
+    private String preferredFood;
     private double swimSpeedKmh;
     
     public Aquatic(String id, String name, double weightKg, LocalDate birthDate, String finType, double swimSpeedKmh) {
         super(id, name, weightKg, birthDate);
-        this.finType = finType;
+        this.preferredFood = finType;
         this.swimSpeedKmh = swimSpeedKmh;
     }
 
-    public String getFinType() {
-        return finType;
+    public String getPreferredFood() {
+        return preferredFood;
     }
 
-    public void setFinType(String finType) {
-        this.finType = finType;
+    public void setPreferredFood(String finType) {
+        this.preferredFood = preferredFood;
     }
 
     public double getSwimSpeedKmh() {
@@ -35,6 +35,6 @@ public class Aquatic extends Animal {
     
     @Override
     public String toString() {
-        return "Aquatic [name=" + getName() + ", weight=" + getWeightKg() + "kg, finType=" + finType + ", swimSpeed=" + swimSpeedKmh + "km/h]";
+        return "Aquatic [name=" + getName() + ", weight=" + getWeightKg() + "kg, preferredFood=" + preferredFood + ", swimSpeed=" + swimSpeedKmh + "km/h]";
     }
 }
