@@ -54,6 +54,11 @@ public class GUIMain extends javax.swing.JFrame {
         editAerial = new javax.swing.JMenuItem();
         deleteAerial = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        getAquatic = new javax.swing.JMenuItem();
+        getByldAquatic = new javax.swing.JMenuItem();
+        createAquatic = new javax.swing.JMenuItem();
+        editAquatic = new javax.swing.JMenuItem();
+        deleteAquatic = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
 
@@ -127,6 +132,47 @@ public class GUIMain extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Acuaticos");
+
+        getAquatic.setText("Ver todos");
+        getAquatic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getAquaticActionPerformed(evt);
+            }
+        });
+        jMenu4.add(getAquatic);
+
+        getByldAquatic.setText("Buscar");
+        getByldAquatic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getByldAquaticActionPerformed(evt);
+            }
+        });
+        jMenu4.add(getByldAquatic);
+
+        createAquatic.setText("Crear");
+        createAquatic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createAquaticActionPerformed(evt);
+            }
+        });
+        jMenu4.add(createAquatic);
+
+        editAquatic.setText("Buscar y editar");
+        editAquatic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editAquaticActionPerformed(evt);
+            }
+        });
+        jMenu4.add(editAquatic);
+
+        deleteAquatic.setText("Buscar y eliminar");
+        deleteAquatic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteAquaticActionPerformed(evt);
+            }
+        });
+        jMenu4.add(deleteAquatic);
+
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Ayuda");
@@ -187,12 +233,41 @@ public class GUIMain extends javax.swing.JFrame {
         gui.setVisible(true);
     }//GEN-LAST:event_deleteAerialActionPerformed
 
+    private void getAquaticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getAquaticActionPerformed
+        GUIGetAquatic gui = new GUIGetAquatic(aquaticService);
+        gui.setVisible(true);
+    }//GEN-LAST:event_getAquaticActionPerformed
+
+    private void createAquaticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAquaticActionPerformed
+        GUICreateAquatic gui = new GUICreateAquatic(aquaticService);
+        gui.setVisible(true);
+    }//GEN-LAST:event_createAquaticActionPerformed
+
+    private void getByldAquaticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getByldAquaticActionPerformed
+        GUIGetAquaticById gui = new GUIGetAquaticById(aquaticService);
+        gui.setVisible(true);    }//GEN-LAST:event_getByldAquaticActionPerformed
+
+    private void editAquaticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAquaticActionPerformed
+        GUIEditAquatic gui = new GUIEditAquatic(aquaticService);
+        gui.setVisible(true);
+    }//GEN-LAST:event_editAquaticActionPerformed
+
+    private void deleteAquaticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteAquaticActionPerformed
+        GUIDeleteAquatic gui = new GUIDeleteAquatic(aquaticService);
+        gui.setVisible(true);
+    }//GEN-LAST:event_deleteAquaticActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem createAerial;
+    private javax.swing.JMenuItem createAquatic;
     private javax.swing.JMenuItem deleteAerial;
+    private javax.swing.JMenuItem deleteAquatic;
     private javax.swing.JMenuItem editAerial;
+    private javax.swing.JMenuItem editAquatic;
     private javax.swing.JMenuItem getAerial;
+    private javax.swing.JMenuItem getAquatic;
     private javax.swing.JMenuItem getByIdAerial;
+    private javax.swing.JMenuItem getByldAquatic;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;

@@ -1,39 +1,40 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.zoo_animals.model;
 
 import java.time.LocalDate;
 
 public class Aquatic extends Animal {
-    private Habitat habitat; 
-
-
-    public Aquatic(String id, String name, double weightKg, LocalDate birthDate, Habitat habitat) {
+    private String finType;
+    private double swimSpeedKmh;
+    
+    public Aquatic(String id, String name, double weightKg, LocalDate birthDate, String finType, double swimSpeedKmh) {
         super(id, name, weightKg, birthDate);
-        this.habitat = habitat;
+        this.finType = finType;
+        this.swimSpeedKmh = swimSpeedKmh;
     }
 
-    // Getter and Setter
-    public Habitat getHabitat() {
-        return habitat;
+    public String getFinType() {
+        return finType;
     }
 
-    public void setHabitat(Habitat habitat) {
-        this.habitat = habitat;
+    public void setFinType(String finType) {
+        this.finType = finType;
     }
 
+    public double getSwimSpeedKmh() {
+        return swimSpeedKmh;
+    }
+
+    public void setSwimSpeedKmh(double swimSpeedKmh) {
+        this.swimSpeedKmh = swimSpeedKmh;
+    }
 
     @Override
     public double calculateCareIndex() {
-        // Ejemplo: peso * 0.2 + tamaño del hábitat (m2 / 10)
-        return (getWeightKg() * 0.2) + (habitat.getAreaM2() / 10);
+        return (getWeightKg() * 0.2) + (swimSpeedKmh * 0.1);
     }
-    
     
     @Override
     public String toString() {
-        return "Aquatic [name=" + getName() + ", weight=" + getWeightKg() + "kg, habitat=" + habitat + "]";
+        return "Aquatic [name=" + getName() + ", weight=" + getWeightKg() + "kg, finType=" + finType + ", swimSpeed=" + swimSpeedKmh + "km/h]";
     }
 }

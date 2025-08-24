@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.zoo_animals.service;
 
 import com.mycompany.zoo_animals.model.Aquatic;
@@ -44,7 +40,8 @@ public class AquaticService implements IAquaticService {
             existing.setName(updatedAquatic.getName());
             existing.setWeightKg(updatedAquatic.getWeightKg());
             existing.setBirthDate(updatedAquatic.getBirthDate());
-            existing.setHabitat(updatedAquatic.getHabitat());
+            existing.setFinType(updatedAquatic.getFinType());
+            existing.setSwimSpeedKmh(updatedAquatic.getSwimSpeedKmh());
         });
     }
 }
