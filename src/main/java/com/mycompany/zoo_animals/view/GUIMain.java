@@ -18,6 +18,7 @@ public class GUIMain extends javax.swing.JFrame {
     
     IAerialService aerialService = new AerialService();
     IAquaticService aquaticService = new AquaticService();
+    com.mycompany.zoo_animals.service.IHabitatService habitatService = new com.mycompany.zoo_animals.service.HabitatService();
 
     /**
      * Creates new form GUIMain
@@ -36,56 +37,30 @@ public class GUIMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
-        jCheckBoxMenuItem4 = new javax.swing.JCheckBoxMenuItem();
-        jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu9 = new javax.swing.JMenu();
-        jMenu10 = new javax.swing.JMenu();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu3 = new javax.swing.JMenu();
-        getAerial = new javax.swing.JMenuItem();
-        getByIdAerial = new javax.swing.JMenuItem();
-        createAerial = new javax.swing.JMenuItem();
-        editAerial = new javax.swing.JMenuItem();
-        deleteAerial = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        getAquatic = new javax.swing.JMenuItem();
-        getByldAquatic = new javax.swing.JMenuItem();
-        createAquatic = new javax.swing.JMenuItem();
-        editAquatic = new javax.swing.JMenuItem();
-        deleteAquatic = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
+    // Componentes no usados eliminados (limpieza)
+    jMenuBar1 = new javax.swing.JMenuBar();
+    jMenu3 = new javax.swing.JMenu();
+    getAerial = new javax.swing.JMenuItem();
+    getByIdAerial = new javax.swing.JMenuItem();
+    createAerial = new javax.swing.JMenuItem();
+    editAerial = new javax.swing.JMenuItem();
+    deleteAerial = new javax.swing.JMenuItem();
+    jMenu4 = new javax.swing.JMenu();
+    getAquatic = new javax.swing.JMenuItem();
+    getByldAquatic = new javax.swing.JMenuItem();
+    createAquatic = new javax.swing.JMenuItem();
+    editAquatic = new javax.swing.JMenuItem();
+    deleteAquatic = new javax.swing.JMenuItem();
+    jMenuHabitat = new javax.swing.JMenu();
+    getHabitat = new javax.swing.JMenuItem();
+    getByIdHabitat = new javax.swing.JMenuItem();
+    createHabitat = new javax.swing.JMenuItem();
+    editHabitat = new javax.swing.JMenuItem();
+    deleteHabitat = new javax.swing.JMenuItem();
+    jMenu5 = new javax.swing.JMenu();
+    jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
 
-        jMenuItem1.setText("jMenuItem1");
-
-        jMenuItem2.setText("jMenuItem2");
-
-        jMenu1.setText("jMenu1");
-
-        jMenu2.setText("jMenu2");
-
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
-
-        jCheckBoxMenuItem2.setSelected(true);
-        jCheckBoxMenuItem2.setText("jCheckBoxMenuItem2");
-
-        jCheckBoxMenuItem4.setSelected(true);
-        jCheckBoxMenuItem4.setText("jCheckBoxMenuItem4");
-
-        jMenu9.setText("File");
-        jMenuBar2.add(jMenu9);
-
-        jMenu10.setText("Edit");
-        jMenuBar2.add(jMenu10);
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu3.setText("Aereos");
 
@@ -132,7 +107,6 @@ public class GUIMain extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Acuaticos");
-
         getAquatic.setText("Ver todos");
         getAquatic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,7 +114,6 @@ public class GUIMain extends javax.swing.JFrame {
             }
         });
         jMenu4.add(getAquatic);
-
         getByldAquatic.setText("Buscar");
         getByldAquatic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,7 +121,6 @@ public class GUIMain extends javax.swing.JFrame {
             }
         });
         jMenu4.add(getByldAquatic);
-
         createAquatic.setText("Crear");
         createAquatic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,7 +128,6 @@ public class GUIMain extends javax.swing.JFrame {
             }
         });
         jMenu4.add(createAquatic);
-
         editAquatic.setText("Buscar y editar");
         editAquatic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,7 +135,6 @@ public class GUIMain extends javax.swing.JFrame {
             }
         });
         jMenu4.add(editAquatic);
-
         deleteAquatic.setText("Buscar y eliminar");
         deleteAquatic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,8 +142,45 @@ public class GUIMain extends javax.swing.JFrame {
             }
         });
         jMenu4.add(deleteAquatic);
-
         jMenuBar1.add(jMenu4);
+
+        jMenuHabitat.setText("Hábitat");
+        getHabitat.setText("Ver todos");
+        getHabitat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getHabitatActionPerformed(evt);
+            }
+        });
+        jMenuHabitat.add(getHabitat);
+        getByIdHabitat.setText("Buscar");
+        getByIdHabitat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getByIdHabitatActionPerformed(evt);
+            }
+        });
+        jMenuHabitat.add(getByIdHabitat);
+        createHabitat.setText("Crear");
+        createHabitat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createHabitatActionPerformed(evt);
+            }
+        });
+        jMenuHabitat.add(createHabitat);
+        editHabitat.setText("Buscar y editar");
+        editHabitat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editHabitatActionPerformed(evt);
+            }
+        });
+        jMenuHabitat.add(editHabitat);
+        deleteHabitat.setText("Buscar y eliminar");
+        deleteHabitat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteHabitatActionPerformed(evt);
+            }
+        });
+        jMenuHabitat.add(deleteHabitat);
+        jMenuBar1.add(jMenuHabitat);
 
         jMenu5.setText("Ayuda");
 
@@ -190,16 +197,14 @@ public class GUIMain extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 671, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 276, Short.MAX_VALUE)
-        );
+    contentPanel = new javax.swing.JPanel(new java.awt.BorderLayout());
+    contentPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
+    welcomeLabel = new javax.swing.JLabel("Bienvenido al Zoológico", javax.swing.SwingConstants.CENTER);
+    welcomeLabel.setFont(welcomeLabel.getFont().deriveFont(java.awt.Font.BOLD, 14f));
+    contentPanel.add(welcomeLabel, java.awt.BorderLayout.CENTER);
+    getContentPane().setLayout(new java.awt.BorderLayout());
+    getContentPane().add(contentPanel, java.awt.BorderLayout.CENTER);
+    setSize(600, 400);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -219,7 +224,7 @@ public class GUIMain extends javax.swing.JFrame {
     }//GEN-LAST:event_getByIdAerialActionPerformed
 
     private void createAerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAerialActionPerformed
-        GUICreateAerial gui = new GUICreateAerial(aerialService);
+    GUICreateAerial gui = new GUICreateAerial(aerialService, habitatService);
         gui.setVisible(true);
     }//GEN-LAST:event_createAerialActionPerformed
 
@@ -260,28 +265,50 @@ public class GUIMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem createAerial;
     private javax.swing.JMenuItem createAquatic;
+    private javax.swing.JMenuItem createHabitat;
     private javax.swing.JMenuItem deleteAerial;
     private javax.swing.JMenuItem deleteAquatic;
+    private javax.swing.JMenuItem deleteHabitat;
     private javax.swing.JMenuItem editAerial;
     private javax.swing.JMenuItem editAquatic;
+    private javax.swing.JMenuItem editHabitat;
     private javax.swing.JMenuItem getAerial;
     private javax.swing.JMenuItem getAquatic;
+    private javax.swing.JMenuItem getHabitat;
     private javax.swing.JMenuItem getByIdAerial;
     private javax.swing.JMenuItem getByldAquatic;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
+    private javax.swing.JMenuItem getByIdHabitat;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu10;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu9;
+    private javax.swing.JMenu jMenuHabitat;
+    private javax.swing.JPanel contentPanel;
+    private javax.swing.JLabel welcomeLabel;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
+    private void getHabitatActionPerformed(java.awt.event.ActionEvent evt) {
+        GUIGetHabitat gui = new GUIGetHabitat(habitatService);
+        gui.setVisible(true);
+    }
+
+    private void getByIdHabitatActionPerformed(java.awt.event.ActionEvent evt) {
+        GUIGetHabitatById gui = new GUIGetHabitatById(habitatService);
+        gui.setVisible(true);
+    }
+
+    private void createHabitatActionPerformed(java.awt.event.ActionEvent evt) {
+        GUICreateHabitat gui = new GUICreateHabitat(habitatService);
+        gui.setVisible(true);
+    }
+
+    private void editHabitatActionPerformed(java.awt.event.ActionEvent evt) {
+        GUIEditHabitat gui = new GUIEditHabitat(habitatService);
+        gui.setVisible(true);
+    }
+
+    private void deleteHabitatActionPerformed(java.awt.event.ActionEvent evt) {
+        GUIDeleteHabitat gui = new GUIDeleteHabitat(habitatService);
+        gui.setVisible(true);
+    }
 }

@@ -5,6 +5,8 @@
 package com.mycompany.zoo_animals.view;
 
 import com.mycompany.zoo_animals.service.IAerialService;
+import java.awt.Font;
+import java.awt.Color;
 
 /**
  *
@@ -21,6 +23,7 @@ public class GUIGetAerialById extends javax.swing.JFrame {
         this.aerialService = aerialService;
         initComponents();
         setLocationRelativeTo(null);
+    styleComponents();
         
         searchInput.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             @Override
@@ -329,6 +332,32 @@ public class GUIGetAerialById extends javax.swing.JFrame {
     private void cleanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanBtnActionPerformed
         clearFields();
     }//GEN-LAST:event_cleanBtnActionPerformed
+
+    // Aplica estilos para mejorar la legibilidad
+    private void styleComponents() {
+        // Hacer los labels un poco más fuertes
+        Font base = idLabel.getFont();
+        Font bold = base.deriveFont(Font.BOLD);
+        idLabel.setFont(bold);
+        jLabel1.setFont(bold);
+        jLabel2.setFont(bold);
+        jLabel3.setFont(bold);
+        jLabel4.setFont(bold);
+        jLabel5.setFont(bold);
+        jLabel6.setFont(bold);
+        jLabel7.setFont(bold);
+
+        javax.swing.JTextField[] readOnly = {
+            idInput, nameInput, weightInput, birthDateInput, wingspanInput,
+            habitatNameInput, habitatAreaInput, climateInput
+        };
+        for (javax.swing.JTextField f : readOnly) {
+            f.setEnabled(true); 
+            f.setEditable(false);
+            f.setBackground(Color.WHITE);
+            f.setDisabledTextColor(Color.BLACK);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField birthDateInput;
