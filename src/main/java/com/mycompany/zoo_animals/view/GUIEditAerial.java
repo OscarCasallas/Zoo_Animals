@@ -7,6 +7,7 @@ package com.mycompany.zoo_animals.view;
 import com.mycompany.zoo_animals.model.Aerial;
 import com.mycompany.zoo_animals.model.Habitat;
 import com.mycompany.zoo_animals.service.IAerialService;
+import javax.swing.text.PlainDocument;
 
 /**
  *
@@ -24,6 +25,7 @@ public class GUIEditAerial extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setFieldsEditable(false);
+        setupFieldValidations();
         
         inputSearch.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             @Override
@@ -249,7 +251,21 @@ public class GUIEditAerial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+   
+    private void setupFieldValidations() {
 
+    ((PlainDocument) nameInput.getDocument()).setDocumentFilter(new TextOnlyDocumentFilter());
+    
+    ((PlainDocument) weightInput.getDocument()).setDocumentFilter(new NumericDocumentFilter());
+    ((PlainDocument) wingspanInput.getDocument()).setDocumentFilter(new NumericDocumentFilter());
+    
+    ((PlainDocument) idInput.getDocument()).setDocumentFilter(new AlphanumericDocumentFilter());
+    
+    nameInput.setToolTipText("Solo letras y espacios");
+    weightInput.setToolTipText("Solo números (ejemplo: 12.5)");
+    wingspanInput.setToolTipText("Solo números (ejemplo: 2.5)");
+    idInput.setToolTipText("Solo letras y números");
+}
     private void nameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameInputActionPerformed

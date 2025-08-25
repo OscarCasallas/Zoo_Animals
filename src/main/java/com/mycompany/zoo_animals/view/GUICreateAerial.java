@@ -9,6 +9,7 @@ import com.mycompany.zoo_animals.model.Habitat;
 import com.mycompany.zoo_animals.service.IAerialService;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
+import javax.swing.text.PlainDocument;
 
 /**
  *
@@ -40,6 +41,7 @@ public class GUICreateAerial extends javax.swing.JFrame {
     refreshHabitats();
     initComponents();
     setLocationRelativeTo(null);
+    setupFieldValidations();
     }
 
     private void refreshHabitats() {
@@ -203,7 +205,20 @@ public class GUICreateAerial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void setupFieldValidations() {
 
+    ((PlainDocument) nameInput.getDocument()).setDocumentFilter(new TextOnlyDocumentFilter());
+    
+    ((PlainDocument) weightInput.getDocument()).setDocumentFilter(new NumericDocumentFilter());
+    ((PlainDocument) wingspanInput.getDocument()).setDocumentFilter(new NumericDocumentFilter());
+    
+    ((PlainDocument) idInput.getDocument()).setDocumentFilter(new AlphanumericDocumentFilter());
+    
+    nameInput.setToolTipText("Solo letras y espacios");
+    weightInput.setToolTipText("Solo números (ejemplo: 12.5)");
+    wingspanInput.setToolTipText("Solo números (ejemplo: 2.5)");
+    idInput.setToolTipText("Solo letras y números");
+}
     private void nameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameInputActionPerformed
@@ -213,24 +228,34 @@ public class GUICreateAerial extends javax.swing.JFrame {
     }//GEN-LAST:event_closeBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        try {
-            String id = idInput.getText().trim();
-            String name = nameInput.getText().trim();
-            double weight;
-            LocalDate birthDate;
-            double wingspan;
-            Habitat habitat;
-            Aerial aerial;
+    try {
+        String id = idInput.getText().trim();
+        String name = nameInput.getText().trim();
+        double weight;
+        LocalDate birthDate;
+        double wingspan;
+        Habitat habitat;
+        Aerial aerial;
 
-            if (id.isEmpty() || name.isEmpty() || weightInput.getText().trim().isEmpty() ||
-                birthDateInput.getText().trim().isEmpty() || wingspanInput.getText().trim().isEmpty() ||
-                habitatComboBox.getSelectedIndex() == -1) {
-                JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+        if (id.isEmpty() || name.isEmpty() || weightInput.getText().trim().isEmpty() ||
+            birthDateInput.getText().trim().isEmpty() || wingspanInput.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
+        if (aerialService.existsById(id)) {
+            JOptionPane.showMessageDialog(this, 
+                "El ID '" + id + "' ya existe.\n" +
+                "Por favor ingresa un identificador diferente.", 
+                "ID Duplicado", 
+                JOptionPane.WARNING_MESSAGE);
+            idInput.requestFocus();
+            idInput.selectAll();
+            return;
+        }
+        
             weight = Double.parseDouble(weightInput.getText().trim());
-            birthDate = LocalDate.parse(birthDateInput.getText().trim());  // formato esperado: YYYY-MM-DD
+            birthDate = LocalDate.parse(birthDateInput.getText().trim());
             wingspan = Double.parseDouble(wingspanInput.getText().trim());
 
             int sel = habitatComboBox.getSelectedIndex();

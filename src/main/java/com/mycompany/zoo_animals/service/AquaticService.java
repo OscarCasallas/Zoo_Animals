@@ -5,15 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- *
- * @author santiagomanchola
- */
 public class AquaticService implements IAquaticService {
+    
     private final List<Aquatic> aquaticAnimals = new ArrayList<>();
 
     @Override
-    public void add(Aquatic aquatic) {
+    public void add(Aquatic aquatic) throws IllegalArgumentException {
+        if (existsById(aquatic.getId())) {
+            throw new IllegalArgumentException(
+                "Ya existe un animal acuático con el ID: " + aquatic.getId() + 
+                ". Por favor usa un identificador diferente."
+            );
+        }
         aquaticAnimals.add(aquatic);
     }
 
@@ -35,13 +38,24 @@ public class AquaticService implements IAquaticService {
     }
 
     @Override
-    public void update(Aquatic updatedAquatic) {
-        getById(updatedAquatic.getId()).ifPresent(existing -> {
-            existing.setName(updatedAquatic.getName());
-            existing.setWeightKg(updatedAquatic.getWeightKg());
-            existing.setBirthDate(updatedAquatic.getBirthDate());
-            existing.setPreferredFood(updatedAquatic.getPreferredFood());
-            existing.setSwimSpeedKmh(updatedAquatic.getSwimSpeedKmh());
-        });
+    public void update(Aquatic updatedAquatic) throws IllegalArgumentException {
+        Optional<Aquatic> existingOpt = getById(updatedAquatic.getId());
+        
+        if (existingOpt.isEmpty()) {
+            throw new IllegalArgumentException(
+                "No se encontró un animal acuático con el ID: " + updatedAquatic.getId()
+            );
+        }
+        
+        Aquatic existing = existingOpt.get();
+        existing.setName(updatedAquatic.getName());
+        existing.setWeightKg(updatedAquatic.getWeightKg());
+        existing.setBirthDate(updatedAquatic.getBirthDate());
+    }
+
+    @Override
+    public boolean existsById(String id) {
+        return aquaticAnimals.stream()
+                .anyMatch(a -> a.getId().equalsIgnoreCase(id));
     }
 }

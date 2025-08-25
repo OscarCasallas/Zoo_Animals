@@ -2,6 +2,7 @@ package com.mycompany.zoo_animals.view;
 
 import com.mycompany.zoo_animals.model.Aquatic;
 import com.mycompany.zoo_animals.service.IAquaticService;
+import javax.swing.text.PlainDocument;
 
 public class GUIEditAquatic extends javax.swing.JFrame {
     
@@ -12,6 +13,7 @@ public class GUIEditAquatic extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setFieldsEditable(false);
+        setupFieldValidations();
         
         inputSearch.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             @Override
@@ -205,7 +207,24 @@ public class GUIEditAquatic extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void setupFieldValidations() {
 
+    ((PlainDocument) nameInput.getDocument()).setDocumentFilter(new TextOnlyDocumentFilter());
+    ((PlainDocument) preferredFoodInput.getDocument()).setDocumentFilter(new TextOnlyDocumentFilter());
+
+    
+    ((PlainDocument) weightInput.getDocument()).setDocumentFilter(new NumericDocumentFilter());
+    ((PlainDocument) swimSpeedInput.getDocument()).setDocumentFilter(new NumericDocumentFilter());
+    
+    ((PlainDocument) idInput.getDocument()).setDocumentFilter(new AlphanumericDocumentFilter());
+    
+    nameInput.setToolTipText("Solo letras y espacios");
+    preferredFoodInput.setToolTipText("Solo letras y espacios");
+    weightInput.setToolTipText("Solo números (ejemplo: 12.5)");
+    swimSpeedInput.setToolTipText("Solo números (ejemplo: 2.5)");
+    idInput.setToolTipText("Solo letras y números");
+}
     private void inputSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSearchActionPerformed
 
     }//GEN-LAST:event_inputSearchActionPerformed

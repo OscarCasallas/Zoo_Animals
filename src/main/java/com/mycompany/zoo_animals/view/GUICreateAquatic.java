@@ -4,6 +4,7 @@ import com.mycompany.zoo_animals.model.Aquatic;
 import com.mycompany.zoo_animals.service.IAquaticService;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
+import javax.swing.text.PlainDocument;
 
 public class GUICreateAquatic extends javax.swing.JFrame {
     
@@ -13,6 +14,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
         this.aquaticService = aquaticService;
         initComponents();
         setLocationRelativeTo(null);
+        setupFieldValidations();
     }
 
     @SuppressWarnings("unchecked")
@@ -49,6 +51,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
 
         jLabel5.setText("Velocidad de nado (km/h)");
 
+        nameInput.setToolTipText("");
         nameInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameInputActionPerformed(evt);
@@ -83,34 +86,31 @@ public class GUICreateAquatic extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(103, 103, 103)
-                        .addComponent(weightInput))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(birthDateInput)
-                            .addComponent(preferredFoodInput)))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(closeBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addBtn))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(idLabel))
-                        .addGap(60, 60, 60)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(idLabel)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(weightInput, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                             .addComponent(idInput)
                             .addComponent(nameInput)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(swimSpeedInput, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(closeBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addBtn)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(swimSpeedInput, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                            .addComponent(birthDateInput)
+                            .addComponent(preferredFoodInput))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -149,7 +149,24 @@ public class GUICreateAquatic extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void setupFieldValidations() {
 
+    ((PlainDocument) nameInput.getDocument()).setDocumentFilter(new TextOnlyDocumentFilter());
+    ((PlainDocument) preferredFoodInput.getDocument()).setDocumentFilter(new TextOnlyDocumentFilter());
+
+    
+    ((PlainDocument) weightInput.getDocument()).setDocumentFilter(new NumericDocumentFilter());
+    ((PlainDocument) swimSpeedInput.getDocument()).setDocumentFilter(new NumericDocumentFilter());
+    
+    ((PlainDocument) idInput.getDocument()).setDocumentFilter(new AlphanumericDocumentFilter());
+    
+    nameInput.setToolTipText("Solo letras y espacios");
+    preferredFoodInput.setToolTipText("Solo letras y espacios");
+    weightInput.setToolTipText("Solo números (ejemplo: 12.5)");
+    swimSpeedInput.setToolTipText("Solo números (ejemplo: 2.5)");
+    idInput.setToolTipText("Solo letras y números");
+}
     private void nameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameInputActionPerformed
@@ -175,9 +192,19 @@ public class GUICreateAquatic extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+        if (aquaticService.existsById(id)) {
+            JOptionPane.showMessageDialog(this, 
+                "El ID '" + id + "' ya existe.\n" +
+                "Por favor ingresa un identificador diferente.", 
+                "ID Duplicado", 
+                JOptionPane.WARNING_MESSAGE);
+            idInput.requestFocus();
+            idInput.selectAll();
+            return;
+        }
 
             weight = Double.parseDouble(weightInput.getText().trim());
-            birthDate = LocalDate.parse(birthDateInput.getText().trim());  // formato esperado: YYYY-MM-DD
+            birthDate = LocalDate.parse(birthDateInput.getText().trim());
             preferredFood = preferredFoodInput.getText().trim();
             swimSpeed = Double.parseDouble(swimSpeedInput.getText().trim());
 

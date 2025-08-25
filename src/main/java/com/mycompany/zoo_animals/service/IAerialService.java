@@ -18,4 +18,5 @@ public interface IAerialService {
     Optional<Aerial> getById(String id);
     void deleteById(String id);
     void update(Aerial aerial);
+    boolean existsById(String id);
 }

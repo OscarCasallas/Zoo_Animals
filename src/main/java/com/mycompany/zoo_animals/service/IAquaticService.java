@@ -18,4 +18,5 @@ public interface IAquaticService {
     Optional<Aquatic> getById(String id);
     void deleteById(String id);
     void update(Aquatic aquatic);
+    boolean existsById(String id);
 }
