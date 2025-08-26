@@ -282,9 +282,15 @@ public class GUIGetAerialById extends javax.swing.JFrame {
                 weightInput.setText(String.valueOf(aerial.getWeightKg()));
                 birthDateInput.setText(aerial.getBirthDate().toString());
                 wingspanInput.setText(String.valueOf(aerial.getWingspan()));
-                habitatNameInput.setText(aerial.getHabitat().getName());
-                habitatAreaInput.setText(String.valueOf(aerial.getHabitat().getAreaM2()));
-                climateInput.setText(aerial.getHabitat().getClimate());
+                if (aerial.getHabitat() != null) {
+                    habitatNameInput.setText(aerial.getHabitat().getName());
+                    habitatAreaInput.setText(String.valueOf(aerial.getHabitat().getAreaM2()));
+                    climateInput.setText(aerial.getHabitat().getClimate());
+                } else {
+                    habitatNameInput.setText("Ninguno");
+                    habitatAreaInput.setText("NA");
+                    climateInput.setText("NA");
+                }
 
                 javax.swing.JOptionPane.showMessageDialog(this,
                     "Animal encontrado.",

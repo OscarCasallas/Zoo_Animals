@@ -5,6 +5,8 @@
 package com.mycompany.zoo_animals.view;
 
 import com.mycompany.zoo_animals.service.IAerialService;
+import java.awt.Font;
+import java.awt.Color;
 
 /**
  *
@@ -21,6 +23,7 @@ public class GUIDeleteAerial extends javax.swing.JFrame {
         this.aerialService = aerialService;
         initComponents();
         setLocationRelativeTo(null);
+    styleComponents();
         
         searchInput.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             @Override
@@ -147,7 +150,7 @@ public class GUIDeleteAerial extends javax.swing.JFrame {
             }
         });
 
-        btnClose.setText("Cerar");
+    btnClose.setText("Cerrar");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);
@@ -278,9 +281,15 @@ public class GUIDeleteAerial extends javax.swing.JFrame {
                 weightInput.setText(String.valueOf(aerial.getWeightKg()));
                 birthDateInput.setText(aerial.getBirthDate().toString());
                 wingspanInput.setText(String.valueOf(aerial.getWingspan()));
-                habitatNameInput.setText(aerial.getHabitat().getName());
-                habitatAreaInput.setText(String.valueOf(aerial.getHabitat().getAreaM2()));
-                climateInput.setText(aerial.getHabitat().getClimate());
+                if (aerial.getHabitat() != null) {
+                    habitatNameInput.setText(aerial.getHabitat().getName());
+                    habitatAreaInput.setText(String.valueOf(aerial.getHabitat().getAreaM2()));
+                    climateInput.setText(aerial.getHabitat().getClimate());
+                } else {
+                    habitatNameInput.setText("Ninguno");
+                    habitatAreaInput.setText("NA");
+                    climateInput.setText("NA");
+                }
 
                 javax.swing.JOptionPane.showMessageDialog(this,
                     "Animal encontrado.",
@@ -365,6 +374,30 @@ public class GUIDeleteAerial extends javax.swing.JFrame {
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void styleComponents() {
+        Font base = idLabel.getFont();
+        Font bold = base.deriveFont(Font.BOLD);
+        idLabel.setFont(bold);
+        jLabel1.setFont(bold);
+        jLabel2.setFont(bold);
+        jLabel3.setFont(bold);
+        jLabel4.setFont(bold);
+        jLabel5.setFont(bold);
+        jLabel6.setFont(bold);
+        jLabel7.setFont(bold);
+
+        javax.swing.JTextField[] readOnly = {
+            idInput, nameInput, weightInput, birthDateInput, wingspanInput,
+            habitatNameInput, habitatAreaInput, climateInput
+        };
+        for (javax.swing.JTextField f : readOnly) {
+            f.setEnabled(true); 
+            f.setEditable(false);
+            f.setBackground(Color.WHITE);
+            f.setDisabledTextColor(Color.BLACK);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField birthDateInput;

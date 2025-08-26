@@ -42,6 +42,7 @@ public class GUICreateAerial extends javax.swing.JFrame {
     initComponents();
     setLocationRelativeTo(null);
     setupFieldValidations();
+    widenForm();
     }
 
     private void refreshHabitats() {
@@ -59,6 +60,17 @@ public class GUICreateAerial extends javax.swing.JFrame {
         }
     }
 
+    private void widenForm() {
+        int cols = 20; 
+        idInput.setColumns(cols);
+        nameInput.setColumns(cols);
+        weightInput.setColumns(cols);
+        birthDateInput.setColumns(cols - 4); 
+        wingspanInput.setColumns(cols);
+        habitatComboBox.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXXXXXXXX");
+        pack(); 
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,32 +80,21 @@ public class GUICreateAerial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-    jPanel1 = new javax.swing.JPanel();
-    idLabel = new javax.swing.JLabel();
-    idInput = new javax.swing.JTextField();
-    jLabel1 = new javax.swing.JLabel();
-    nameInput = new javax.swing.JTextField();
-    jLabel2 = new javax.swing.JLabel();
-    weightInput = new javax.swing.JTextField();
-    jLabel3 = new javax.swing.JLabel();
-    birthDateInput = new javax.swing.JTextField();
-    jLabel4 = new javax.swing.JLabel();
-    wingspanInput = new javax.swing.JTextField();
-    jLabel5 = new javax.swing.JLabel();
-    habitatComboBox = new javax.swing.JComboBox<>();
-    closeBtn = new javax.swing.JButton();
-    addBtn = new javax.swing.JButton();
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        idLabel = new javax.swing.JLabel();
+        idInput = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        nameInput = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        weightInput = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        birthDateInput = new javax.swing.JTextField();
+        birthDatePickerBtn = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        wingspanInput = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        habitatComboBox = new javax.swing.JComboBox();
+        closeBtn = new javax.swing.JButton();
+        addBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar animal aereo");
@@ -102,35 +103,24 @@ public class GUICreateAerial extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre");
 
-        nameInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameInputActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Peso");
 
         jLabel3.setText("Fecha de nacimiento");
 
+        birthDatePickerBtn.setText("📅");
+        birthDatePickerBtn.setToolTipText("Seleccionar fecha");
+
         jLabel4.setText("Envergadura");
 
-    jLabel5.setText("Hábitat");
+        jLabel5.setText("Hábitat");
 
-    {
-        java.util.List<String> names = new java.util.ArrayList<>();
-        names.add("Ninguno");
-        if (habitats != null) {
-            habitats.forEach(h -> names.add(h.getName()));
-        }
-        habitatComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(names.toArray(new String[0])));
-        habitatComboBox.setSelectedIndex(0);
-    }
         closeBtn.setText("Cerrar");
         closeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeBtnActionPerformed(evt);
             }
         });
+
         addBtn.setText("Guardar");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,22 +141,23 @@ public class GUICreateAerial extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nameInput)
                             .addComponent(idInput)
+                            .addComponent(nameInput)
                             .addComponent(weightInput)
-                            .addComponent(birthDateInput)
-                            .addComponent(wingspanInput)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(birthDateInput)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(birthDatePickerBtn))
+                            .addComponent(wingspanInput)
+                            .addComponent(habitatComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(closeBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(habitatComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(addBtn)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -185,13 +176,15 @@ public class GUICreateAerial extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(weightInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(birthDateInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(wingspanInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(birthDateInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(birthDatePickerBtn))
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(wingspanInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -295,11 +288,21 @@ public class GUICreateAerial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_climateInputActionPerformed
 
+    private java.time.LocalDate parseDateSafely(String txt) {
+        try {
+            if (txt == null || txt.isBlank()) return null;
+            return java.time.LocalDate.parse(txt.trim());
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
     private javax.swing.JTextField birthDateInput;
+    private javax.swing.JButton birthDatePickerBtn;
     private javax.swing.JButton closeBtn;
-    private javax.swing.JComboBox<String> habitatComboBox;
+    private javax.swing.JComboBox habitatComboBox;
     private javax.swing.JTextField idInput;
     private javax.swing.JLabel idLabel;
     private javax.swing.JLabel jLabel1;
@@ -307,7 +310,6 @@ public class GUICreateAerial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nameInput;
     private javax.swing.JTextField weightInput;
     private javax.swing.JTextField wingspanInput;

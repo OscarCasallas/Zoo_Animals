@@ -15,6 +15,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setupFieldValidations();
+    widenForm();
     }
 
     @SuppressWarnings("unchecked")
@@ -30,7 +31,10 @@ public class GUICreateAquatic extends javax.swing.JFrame {
         idInput = new javax.swing.JTextField();
         nameInput = new javax.swing.JTextField();
         weightInput = new javax.swing.JTextField();
-        birthDateInput = new javax.swing.JTextField();
+    birthDateInput = new javax.swing.JTextField();
+    birthDateInput.setEditable(false);
+    birthDateInput.setFocusable(false);
+    birthDatePickerBtn = new javax.swing.JButton();
         preferredFoodInput = new javax.swing.JTextField();
         swimSpeedInput = new javax.swing.JTextField();
         closeBtn = new javax.swing.JButton();
@@ -45,7 +49,15 @@ public class GUICreateAquatic extends javax.swing.JFrame {
 
         jLabel2.setText("Peso");
 
-        jLabel3.setText("Fecha de nacimiento");
+    jLabel3.setText("Fecha de nacimiento");
+    birthDatePickerBtn.setText("📅"); 
+        birthDatePickerBtn.setToolTipText("Seleccionar fecha");
+        birthDatePickerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                var chosen = DatePickerUtil.pickDate(GUICreateAquatic.this, parseDateSafely(birthDateInput.getText()));
+                if (chosen != null) birthDateInput.setText(chosen.toString());
+            }
+        });
 
         jLabel4.setText("Alimentación preferida");
 
@@ -89,28 +101,25 @@ public class GUICreateAquatic extends javax.swing.JFrame {
                         .addComponent(closeBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(addBtn))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
                             .addComponent(idLabel)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(weightInput, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                            .addComponent(idInput)
-                            .addComponent(nameInput)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
                             .addComponent(jLabel3)
+                            .addComponent(jLabel4)
                             .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(swimSpeedInput, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                            .addComponent(birthDateInput)
-                            .addComponent(preferredFoodInput))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(birthDateInput)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(birthDatePickerBtn))
+                            .addComponent(weightInput)
+                            .addComponent(nameInput)
+                            .addComponent(idInput)
+                            .addComponent(preferredFoodInput)
+                            .addComponent(swimSpeedInput))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -131,7 +140,8 @@ public class GUICreateAquatic extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(birthDateInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(birthDateInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(birthDatePickerBtn))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -167,6 +177,17 @@ public class GUICreateAquatic extends javax.swing.JFrame {
     swimSpeedInput.setToolTipText("Solo números (ejemplo: 2.5)");
     idInput.setToolTipText("Solo letras y números");
 }
+
+    private void widenForm() {
+        int cols = 20;
+        idInput.setColumns(cols);
+        nameInput.setColumns(cols);
+        weightInput.setColumns(cols);
+        birthDateInput.setColumns(cols - 4); 
+        preferredFoodInput.setColumns(cols);
+        swimSpeedInput.setColumns(cols);
+        pack();
+    }
     private void nameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameInputActionPerformed
@@ -236,9 +257,17 @@ public class GUICreateAquatic extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_swimSpeedInputActionPerformed
 
+    private java.time.LocalDate parseDateSafely(String txt) {
+        try {
+            if (txt == null || txt.isBlank()) return null;
+            return java.time.LocalDate.parse(txt.trim());
+        } catch (Exception ex) { return null; }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
     private javax.swing.JTextField birthDateInput;
+    private javax.swing.JButton birthDatePickerBtn;
     private javax.swing.JButton closeBtn;
     private javax.swing.JTextField idInput;
     private javax.swing.JLabel idLabel;

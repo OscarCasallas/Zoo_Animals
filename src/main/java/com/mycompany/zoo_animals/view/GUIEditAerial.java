@@ -16,12 +16,20 @@ import javax.swing.text.PlainDocument;
 public class GUIEditAerial extends javax.swing.JFrame {
     
     private IAerialService aerialService;
+    private com.mycompany.zoo_animals.service.IHabitatService habitatService;
+    private java.util.List<Habitat> habitats = new java.util.ArrayList<>();
 
     /**
      * Creates new form GUIEditAerial
      */
     public GUIEditAerial(IAerialService aerialService) {
+        this(aerialService, new com.mycompany.zoo_animals.service.HabitatService());
+    }
+
+    public GUIEditAerial(IAerialService aerialService, com.mycompany.zoo_animals.service.IHabitatService habitatService) {
         this.aerialService = aerialService;
+        this.habitatService = habitatService;
+        refreshHabitats();
         initComponents();
         setLocationRelativeTo(null);
         setFieldsEditable(false);
@@ -42,7 +50,30 @@ public class GUIEditAerial extends javax.swing.JFrame {
             }
         });
     }
+
+    @Override
+    public void setVisible(boolean b) {
+        if (b) {
+            refreshHabitats(); 
+        }
+        super.setVisible(b);
+    }
     
+    private void refreshHabitats() {
+        if (habitatService != null) {
+            habitats = habitatService.getAll();
+        } else {
+            habitats = new java.util.ArrayList<>();
+        }
+        if (habitatComboBox != null) {
+            java.util.List<String> names = new java.util.ArrayList<>();
+            names.add("Ninguno");
+            habitats.forEach(h -> names.add(h.getName()));
+            habitatComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(names.toArray(new String[0])));
+            habitatComboBox.setSelectedIndex(0);
+        }
+    }
+
     private void setFieldsEditable(boolean editable) {
         nameInput.setEditable(editable);
         nameInput.setFocusable(editable);
@@ -50,20 +81,13 @@ public class GUIEditAerial extends javax.swing.JFrame {
         weightInput.setEditable(editable);
         weightInput.setFocusable(editable);
 
-        birthDateInput.setEditable(editable);
-        birthDateInput.setFocusable(editable);
 
         wingspanInput.setEditable(editable);
         wingspanInput.setFocusable(editable);
 
-        habitatNameInput.setEditable(editable);
-        habitatNameInput.setFocusable(editable);
-
-        habitatAreaInput.setEditable(editable);
-        habitatAreaInput.setFocusable(editable);
-
-        climateInput.setEditable(editable);
-        climateInput.setFocusable(editable);
+    if (habitatComboBox != null) {
+        habitatComboBox.setEnabled(editable); 
+    }
     }
 
     /**
@@ -86,15 +110,14 @@ public class GUIEditAerial extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         weightInput = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        birthDateInput = new javax.swing.JTextField();
+    birthDateInput = new javax.swing.JTextField();
+    birthDateInput.setEditable(false);
+    birthDateInput.setFocusable(false);
+    birthDatePickerBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         wingspanInput = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        habitatNameInput = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        habitatAreaInput = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        climateInput = new javax.swing.JTextField();
+    jLabel5 = new javax.swing.JLabel();
+    habitatComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar animal aereo");
@@ -137,26 +160,25 @@ public class GUIEditAerial extends javax.swing.JFrame {
         jLabel2.setText("Peso");
 
         jLabel3.setText("Fecha de nacimiento");
+        birthDatePickerBtn.setText("\uD83D\uDCC5");
+        birthDatePickerBtn.setToolTipText("Seleccionar fecha");
+        birthDatePickerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                var chosen = DatePickerUtil.pickDate(GUIEditAerial.this, parseDateSafely(birthDateInput.getText()));
+                if (chosen != null) birthDateInput.setText(chosen.toString());
+            }
+        });
 
         jLabel4.setText("Envergadura");
 
-        jLabel5.setText("Nombre Habitat");
-
-        jLabel6.setText("Area Habitat");
-
-        habitatAreaInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                habitatAreaInputActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setText("Clima Habitat");
-
-        climateInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                climateInputActionPerformed(evt);
-            }
-        });
+        jLabel5.setText("Hábitat");
+        {
+            java.util.List<String> names = new java.util.ArrayList<>();
+            names.add("Ninguno");
+            if (habitats != null) habitats.forEach(h -> names.add(h.getName()));
+            habitatComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(names.toArray(new String[0])));
+            habitatComboBox.setSelectedIndex(0);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,31 +200,21 @@ public class GUIEditAerial extends javax.swing.JFrame {
                             .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
+                            .addComponent(jLabel3)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(habitatComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(wingspanInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
-                            .addComponent(birthDateInput, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(birthDateInput)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(birthDatePickerBtn))
                             .addComponent(weightInput, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(nameInput, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(idInput, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jLabel5)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(habitatNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
-                    .addComponent(jLabel6)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(habitatAreaInput, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(jLabel7)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(climateInput, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,27 +238,25 @@ public class GUIEditAerial extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(birthDateInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(birthDatePickerBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(wingspanInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(habitatComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClose)
                     .addComponent(btnEdit))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(229, 229, 229)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(habitatNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6)
-                        .addComponent(habitatAreaInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7)
-                        .addComponent(climateInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(55, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -270,16 +280,10 @@ public class GUIEditAerial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nameInputActionPerformed
 
-    private void habitatAreaInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_habitatAreaInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_habitatAreaInputActionPerformed
-
-    private void climateInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_climateInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_climateInputActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         try {
+            refreshHabitats(); 
             String id = inputSearch.getText().trim();
 
             if (id.isEmpty()) {
@@ -296,11 +300,18 @@ public class GUIEditAerial extends javax.swing.JFrame {
                 weightInput.setText(String.valueOf(aerial.getWeightKg()));
                 birthDateInput.setText(aerial.getBirthDate().toString());
                 wingspanInput.setText(String.valueOf(aerial.getWingspan()));
-                habitatNameInput.setText(aerial.getHabitat().getName());
-                habitatAreaInput.setText(String.valueOf(aerial.getHabitat().getAreaM2() ));
-                climateInput.setText(aerial.getHabitat().getClimate());
-                
+                if (aerial.getHabitat() != null) {
+                    Habitat h = aerial.getHabitat();
+                    int idx = 0;
+                    for (int i = 0; i < habitats.size(); i++) {
+                        if (habitats.get(i).getName().equals(h.getName())) { idx = i + 1; break; }
+                    }
+                    habitatComboBox.setSelectedIndex(idx);
+                } else {
+                    habitatComboBox.setSelectedIndex(0);
+                }
                 setFieldsEditable(true);
+                habitatComboBox.setEnabled(true);
 
                 javax.swing.JOptionPane.showMessageDialog(this,
                     "Animal encontrado y campos poblados.",
@@ -325,12 +336,13 @@ public class GUIEditAerial extends javax.swing.JFrame {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
          try {
-            Habitat habitat = new Habitat(
-                habitatNameInput.getText().trim(),
-                Double.parseDouble(habitatAreaInput.getText().trim()),
-                climateInput.getText().trim()
-            );
-             
+            Habitat habitat;
+            int sel = habitatComboBox.getSelectedIndex();
+            if (sel <= 0) {
+                habitat = null;
+            } else {
+                habitat = habitats.get(sel - 1);
+            }
             Aerial aerial = new Aerial(
                 idInput.getText().trim(),
                 nameInput.getText().trim(),
@@ -361,9 +373,7 @@ public class GUIEditAerial extends javax.swing.JFrame {
         weightInput.setText("");
         birthDateInput.setText("");
         wingspanInput.setText("");
-        habitatNameInput.setText("");
-        habitatAreaInput.setText("");
-        climateInput.setText("");
+    if (habitatComboBox != null) habitatComboBox.setSelectedIndex(0);
 
         setFieldsEditable(false);
     }
@@ -372,14 +382,17 @@ public class GUIEditAerial extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 
+    private java.time.LocalDate parseDateSafely(String txt) {
+        try { if (txt == null || txt.isBlank()) return null; return java.time.LocalDate.parse(txt.trim()); } catch (Exception e) { return null; }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField birthDateInput;
+    private javax.swing.JButton birthDatePickerBtn;
     private javax.swing.JToggleButton btnClose;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JTextField climateInput;
-    private javax.swing.JTextField habitatAreaInput;
-    private javax.swing.JTextField habitatNameInput;
+    private javax.swing.JComboBox<String> habitatComboBox;
     private javax.swing.JTextField idInput;
     private javax.swing.JLabel idLabel;
     private javax.swing.JTextField inputSearch;
@@ -388,8 +401,6 @@ public class GUIEditAerial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField nameInput;
     private javax.swing.JTextField weightInput;
     private javax.swing.JTextField wingspanInput;

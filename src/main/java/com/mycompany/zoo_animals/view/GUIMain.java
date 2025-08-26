@@ -229,7 +229,7 @@ public class GUIMain extends javax.swing.JFrame {
     }//GEN-LAST:event_createAerialActionPerformed
 
     private void editAerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAerialActionPerformed
-        GUIEditAerial gui = new GUIEditAerial(aerialService);
+    GUIEditAerial gui = new GUIEditAerial(aerialService, habitatService);
         gui.setVisible(true);
     }//GEN-LAST:event_editAerialActionPerformed
 

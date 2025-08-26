@@ -134,6 +134,8 @@ public class GUIGetAerial extends javax.swing.JFrame {
                     a.getHabitat().getAreaM2(),
                     a.getHabitat().getClimate()
                 );
+            } else {
+                habitatStr = "Ninguno";
             }
             model.addRow(new Object[]{
                 a.getId(),
