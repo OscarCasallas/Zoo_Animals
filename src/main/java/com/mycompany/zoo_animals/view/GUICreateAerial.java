@@ -109,6 +109,14 @@ public class GUICreateAerial extends javax.swing.JFrame {
 
         birthDatePickerBtn.setText("📅");
         birthDatePickerBtn.setToolTipText("Seleccionar fecha");
+        birthDateInput.setEditable(false);
+        birthDateInput.setFocusable(false);
+        birthDatePickerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                var chosen = DatePickerUtil.pickDate(GUICreateAerial.this, parseDateSafely(birthDateInput.getText()));
+                if (chosen != null) birthDateInput.setText(chosen.toString());
+            }
+        });
 
         jLabel4.setText("Envergadura");
 
@@ -268,7 +276,8 @@ public class GUICreateAerial extends javax.swing.JFrame {
             weightInput.setText("");
             birthDateInput.setText("");
             wingspanInput.setText("");
-            habitatComboBox.setSelectedIndex(-1);
+            // Reiniciar selección de hábitat a "Ninguno" (índice 0) para consistencia
+            habitatComboBox.setSelectedIndex(0);
 
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(this, "Error en formato numérico. Verifica peso y envergadura.", "Error", JOptionPane.ERROR_MESSAGE);
