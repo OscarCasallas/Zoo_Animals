@@ -2,7 +2,7 @@ package com.mycompany.zoo_animals.model;
 
 import java.time.LocalDate;
 
-public class Aquatic extends Animal {
+public class Aquatic extends Animal implements ISwimmable{
     private String preferredFood;
     private double swimSpeedKmh;
     
@@ -28,6 +28,20 @@ public class Aquatic extends Animal {
         this.swimSpeedKmh = swimSpeedKmh;
     }
 
+        
+    // Implementación de ISwimmable
+    @Override
+    public void swim() {
+        System.out.println(getName() + " is swimming at " + swimSpeedKmh + " km/h.");
+    }
+
+    @Override
+    public double getMaxDepth() {
+        // Ejemplo: cuanto mayor velocidad, mayor capacidad de buceo
+        return swimSpeedKmh * 10; 
+    }
+    
+    
     @Override
     public double calculateCareIndex() {
         return (getWeightKg() * 0.2) + (swimSpeedKmh * 0.1);

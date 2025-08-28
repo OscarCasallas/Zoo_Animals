@@ -4,7 +4,7 @@
  */
 package com.mycompany.zoo_animals.model;
 
-public interface IFlyable {
-    void fly();
-    double getMaxAltitude();
+public interface ISwimmable {
+    void swim();           
+    double getMaxDepth();     
 }
