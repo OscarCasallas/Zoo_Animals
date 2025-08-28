@@ -4,6 +4,7 @@
  */
 package com.mycompany.zoo_animals.view;
 
+import com.mycompany.zoo_animals.model.Aerial;
 import com.mycompany.zoo_animals.service.IAerialService;
 import java.awt.Font;
 import java.awt.Color;
@@ -15,6 +16,7 @@ import java.awt.Color;
 public class GUIGetAerialById extends javax.swing.JFrame {
     
     private IAerialService aerialService;
+    private Aerial currentAerial;
 
     /**
      * Creates new form GUIGetAerialById
@@ -70,6 +72,7 @@ public class GUIGetAerialById extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         habitatNameInput = new javax.swing.JTextField();
         cleanBtn = new javax.swing.JButton();
+        computeBtn1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Buscar animal aereo");
@@ -156,6 +159,13 @@ public class GUIGetAerialById extends javax.swing.JFrame {
             }
         });
 
+        computeBtn1.setText("Calcular cuidado");
+        computeBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                computeBtn1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,8 +182,11 @@ public class GUIGetAerialById extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jButton1)
+                        .addGap(155, 155, 155)
+                        .addComponent(computeBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cleanBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -187,9 +200,8 @@ public class GUIGetAerialById extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(climateInput))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cleanBtn)))
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -219,7 +231,7 @@ public class GUIGetAerialById extends javax.swing.JFrame {
                     .addComponent(idLabel))
                 .addGap(49, 49, 49)
                 .addComponent(jLabel2)
-                .addGap(94, 94, 94)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(habitatNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,6 +242,7 @@ public class GUIGetAerialById extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
+                    .addComponent(computeBtn1)
                     .addComponent(cleanBtn))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,7 +261,7 @@ public class GUIGetAerialById extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(wingspanInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4))
-                    .addContainerGap(83, Short.MAX_VALUE)))
+                    .addContainerGap(91, Short.MAX_VALUE)))
         );
 
         pack();
@@ -265,7 +278,6 @@ public class GUIGetAerialById extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         try {
             String id = searchInput.getText().trim();
-
             if (id.isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this,
                     "Por favor ingresa un ID.",
@@ -275,8 +287,9 @@ public class GUIGetAerialById extends javax.swing.JFrame {
             }
 
             var optionalAerial = aerialService.getById(id);
-
             optionalAerial.ifPresentOrElse(aerial -> {
+                this.currentAerial = aerial;
+                
                 idInput.setText(aerial.getId());
                 nameInput.setText(aerial.getName());
                 weightInput.setText(String.valueOf(aerial.getWeightKg()));
@@ -296,8 +309,8 @@ public class GUIGetAerialById extends javax.swing.JFrame {
                     "Animal encontrado.",
                     "Éxito",
                     javax.swing.JOptionPane.INFORMATION_MESSAGE);
-
             }, () -> {
+                this.currentAerial = null;
                 clearFields();
                 javax.swing.JOptionPane.showMessageDialog(this,
                     "No se encontró un animal con ID " + id,
@@ -305,6 +318,7 @@ public class GUIGetAerialById extends javax.swing.JFrame {
                     javax.swing.JOptionPane.ERROR_MESSAGE);
             });
         } catch (Exception e) {
+            this.currentAerial = null;
             javax.swing.JOptionPane.showMessageDialog(this,
                 e.getMessage(),
                 "Animal no encontrado",
@@ -313,6 +327,7 @@ public class GUIGetAerialById extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void clearFields() {
+        this.currentAerial = null;
         idInput.setText("");
         nameInput.setText("");
         weightInput.setText("");
@@ -339,9 +354,33 @@ public class GUIGetAerialById extends javax.swing.JFrame {
         clearFields();
     }//GEN-LAST:event_cleanBtnActionPerformed
 
-    // Aplica estilos para mejorar la legibilidad
+    private void computeBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_computeBtn1ActionPerformed
+       if (currentAerial == null) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Primero debes buscar un animal.",
+                "Error",
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+    try {
+        double careIndex = currentAerial.calculateCareIndex();
+        
+        javax.swing.JOptionPane.showMessageDialog(this,
+            String.format("Animal: %s\nÍndice de cuidado: %.2f puntos",
+                         currentAerial.getName(),
+                         careIndex),
+            "Índice de Cuidado",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+            "Error al calcular el índice de cuidado: " + e.getMessage(),
+            "Error",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_computeBtn1ActionPerformed
+
     private void styleComponents() {
-        // Hacer los labels un poco más fuertes
         Font base = idLabel.getFont();
         Font bold = base.deriveFont(Font.BOLD);
         idLabel.setFont(bold);
@@ -370,6 +409,7 @@ public class GUIGetAerialById extends javax.swing.JFrame {
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton cleanBtn;
     private javax.swing.JTextField climateInput;
+    private javax.swing.JButton computeBtn1;
     private javax.swing.JTextField habitatAreaInput;
     private javax.swing.JTextField habitatNameInput;
     private javax.swing.JTextField idInput;
