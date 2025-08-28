@@ -57,7 +57,7 @@ public class GUIMain extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu6 = new javax.swing.JMenu();
-        jCheckBoxMenuItem4 = new javax.swing.JCheckBoxMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         getAerial = new javax.swing.JMenuItem();
         getByIdAerial = new javax.swing.JMenuItem();
@@ -77,7 +77,7 @@ public class GUIMain extends javax.swing.JFrame {
         editHabitat = new javax.swing.JMenuItem();
         deleteHabitat = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,14 +97,13 @@ public class GUIMain extends javax.swing.JFrame {
 
         jMenu6.setText("Archivo");
 
-        jCheckBoxMenuItem4.setSelected(true);
-        jCheckBoxMenuItem4.setText("Salir");
-        jCheckBoxMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem1.setText("Salir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem4ActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu6.add(jCheckBoxMenuItem4);
+        jMenu6.add(jMenuItem1);
 
         jMenuBar1.add(jMenu6);
 
@@ -242,14 +241,13 @@ public class GUIMain extends javax.swing.JFrame {
 
         jMenu5.setText("Ayuda");
 
-        jCheckBoxMenuItem3.setSelected(true);
-        jCheckBoxMenuItem3.setText("Acerca de");
-        jCheckBoxMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem2.setText("Acerca de");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem3ActionPerformed(evt);
+                jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu5.add(jCheckBoxMenuItem3);
+        jMenu5.add(jMenuItem2);
 
         jMenuBar1.add(jMenu5);
 
@@ -257,10 +255,6 @@ public class GUIMain extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jCheckBoxMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem3ActionPerformed
-        JOptionPane.showMessageDialog(this, "Desarrollado por Oscar Casallas, Andres Nieto, Jose Hidalgo y Santiago Manchola!");
-    }//GEN-LAST:event_jCheckBoxMenuItem3ActionPerformed
 
     private void getAerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getAerialActionPerformed
         GUIGetAerial gui = new GUIGetAerial(aerialService);
@@ -311,19 +305,23 @@ public class GUIMain extends javax.swing.JFrame {
         gui.setVisible(true);
     }//GEN-LAST:event_deleteAquaticActionPerformed
 
-    private void jCheckBoxMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem4ActionPerformed
-    int confirm = JOptionPane.showConfirmDialog(
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(
             this, 
             "¿Está seguro que desea salir del sistema?", 
             "Confirmar salida", 
             JOptionPane.YES_NO_OPTION, 
             JOptionPane.QUESTION_MESSAGE
-    );
-    
-    if (confirm == JOptionPane.YES_OPTION) {
-        System.exit(0); // Cierra toda la aplicación
-    }
-    }//GEN-LAST:event_jCheckBoxMenuItem4ActionPerformed
+        );
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            System.exit(0); // Cierra toda la aplicación
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        JOptionPane.showMessageDialog(this, "Desarrollado por Oscar Casallas, Andres Nieto, Jose Hidalgo y Santiago Manchola!");
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;
@@ -342,8 +340,6 @@ public class GUIMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem getByIdHabitat;
     private javax.swing.JMenuItem getByldAquatic;
     private javax.swing.JMenuItem getHabitat;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu3;
@@ -352,6 +348,8 @@ public class GUIMain extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuHabitat;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
     private void getHabitatActionPerformed(java.awt.event.ActionEvent evt) {
         GUIGetHabitat gui = new GUIGetHabitat(habitatService);
