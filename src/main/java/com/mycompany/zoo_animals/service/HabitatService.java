@@ -8,6 +8,12 @@ import java.util.Optional;
 public class HabitatService implements IHabitatService {
     private final List<Habitat> habitats = new ArrayList<>();
 
+    public HabitatService() {
+        habitats.add(new Habitat("Bosque", 7000, "Húmedo"));
+        habitats.add(new Habitat("Desierto", 8000, "Cálido"));
+        habitats.add(new Habitat("Sabana", 5000, "Tropical"));
+    }
+
     @Override
     public void add(Habitat habitat) {
         habitats.add(habitat);

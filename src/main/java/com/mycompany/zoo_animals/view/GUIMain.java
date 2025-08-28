@@ -27,6 +27,9 @@ public class GUIMain extends javax.swing.JFrame {
         initComponents();
         setSize(900, 650);
         setLocationRelativeTo(null);
+        if (jMenuHabitat != null) {
+            jMenuHabitat.setVisible(false);
+        }
         
         java.net.URL imageUrl = getClass().getResource("/images/zoo.png"); 
         if (imageUrl != null) {
