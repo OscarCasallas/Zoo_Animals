@@ -27,8 +27,9 @@ public class GUIMain extends javax.swing.JFrame {
         initComponents();
         setSize(900, 650);
         setLocationRelativeTo(null);
+        // Mostrar el menú de Hábitat (anteriormente se ocultaba)
         if (jMenuHabitat != null) {
-            jMenuHabitat.setVisible(false);
+            jMenuHabitat.setVisible(true);
         }
         
         java.net.URL imageUrl = getClass().getResource("/images/zoo.png"); 
