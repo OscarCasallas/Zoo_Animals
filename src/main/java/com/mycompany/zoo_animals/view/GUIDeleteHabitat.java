@@ -5,7 +5,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class GUIDeleteHabitat extends JFrame {
-    private IHabitatService habitatService; 
+
+    private IHabitatService habitatService;
 
     public GUIDeleteHabitat(IHabitatService habitatService) {
         this();

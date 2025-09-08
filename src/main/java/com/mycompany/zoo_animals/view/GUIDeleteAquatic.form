@@ -22,101 +22,101 @@
   </AuxValues>
 
   <Layout>
-  <DimensionLayout dim="0">
-    <Group type="103" groupAlignment="0" attributes="0">
-      <Group type="102" alignment="0" attributes="0">
-        <EmptySpace max="-2" attributes="0"/>
-        <Group type="103" groupAlignment="0" attributes="0">
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-            <Component id="searchInput" min="-2" pref="531" max="-2" attributes="0"/>
-            <EmptySpace max="-2" attributes="0"/>
-            <Component id="btnSearch" pref="120" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="searchInput" min="-2" pref="531" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnSearch" pref="120" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btnClose" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="idLabel" min="-2" pref="130" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="swimSpeedInput" alignment="1" pref="492" max="32767" attributes="0"/>
+                          <Component id="preferredFoodInput" alignment="1" pref="492" max="32767" attributes="0"/>
+                          <Component id="birthDateInput" alignment="1" max="32767" attributes="0"/>
+                          <Component id="weightInput" alignment="1" max="32767" attributes="0"/>
+                          <Component id="nameInput" alignment="1" max="32767" attributes="0"/>
+                          <Component id="idInput" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-            <Component id="btnClose" min="-2" max="-2" attributes="0"/>
-            <EmptySpace max="32767" attributes="0"/>
-            <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="searchInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSearch" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="idInput" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="nameInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="weightInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="birthDateInput" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="preferredFoodInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="swimSpeedInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="1" attributes="0">
-            <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="idLabel" min="-2" pref="130" max="-2" attributes="0"/>
-              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-            </Group>
-            <EmptySpace max="32767" attributes="0"/>
-            <Group type="103" groupAlignment="0" max="-2" attributes="0">
-              <Component id="swimSpeedInput" alignment="1" pref="492" max="32767" attributes="0"/>
-              <Component id="preferredFoodInput" alignment="1" pref="492" max="32767" attributes="0"/>
-              <Component id="birthDateInput" alignment="1" max="32767" attributes="0"/>
-              <Component id="weightInput" alignment="1" max="32767" attributes="0"/>
-              <Component id="nameInput" alignment="1" max="32767" attributes="0"/>
-              <Component id="idInput" alignment="1" max="32767" attributes="0"/>
-            </Group>
-          </Group>
-        </Group>
-        <EmptySpace max="-2" attributes="0"/>
       </Group>
-    </Group>
-  </DimensionLayout>
-  <DimensionLayout dim="1">
-    <Group type="103" groupAlignment="0" attributes="0">
-      <Group type="102" alignment="0" attributes="0">
-        <EmptySpace max="-2" attributes="0"/>
-        <Group type="103" groupAlignment="3" attributes="0">
-          <Component id="searchInput" alignment="3" min="-2" max="-2" attributes="0"/>
-          <Component id="btnSearch" alignment="3" min="-2" max="-2" attributes="0"/>
-        </Group>
-        <EmptySpace type="separate" max="-2" attributes="0"/>
-        <Group type="103" groupAlignment="3" attributes="0">
-          <Component id="idInput" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-          <Component id="idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-        </Group>
-        <EmptySpace type="unrelated" max="-2" attributes="0"/>
-        <Group type="103" groupAlignment="3" attributes="0">
-          <Component id="nameInput" alignment="3" min="-2" max="-2" attributes="0"/>
-          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-        </Group>
-        <EmptySpace type="unrelated" max="-2" attributes="0"/>
-        <Group type="103" groupAlignment="3" attributes="0">
-          <Component id="weightInput" alignment="3" min="-2" max="-2" attributes="0"/>
-          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-        </Group>
-        <EmptySpace type="separate" max="-2" attributes="0"/>
-        <Group type="103" groupAlignment="3" attributes="0">
-          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-          <Component id="birthDateInput" alignment="3" min="-2" max="-2" attributes="0"/>
-        </Group>
-        <EmptySpace type="unrelated" max="-2" attributes="0"/>
-        <Group type="103" groupAlignment="3" attributes="0">
-          <Component id="preferredFoodInput" alignment="3" min="-2" max="-2" attributes="0"/>
-          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-        </Group>
-        <EmptySpace type="unrelated" max="-2" attributes="0"/>
-        <Group type="103" groupAlignment="3" attributes="0">
-          <Component id="swimSpeedInput" alignment="3" min="-2" max="-2" attributes="0"/>
-          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-        </Group>
-        <EmptySpace pref="40" max="32767" attributes="0"/>
-        <Group type="103" groupAlignment="3" attributes="0">
-          <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
-          <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
-        </Group>
-        <EmptySpace max="-2" attributes="0"/>
-      </Group>
-    </Group>
-  </DimensionLayout>
+    </DimensionLayout>
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="searchInput">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchInputActionPerformed"/>
-      </Events>
       <Properties>
         <Property name="columns" type="int" value="35"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchInputActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSearch">
       <Properties>
@@ -155,13 +155,13 @@
     <Component class="javax.swing.JTextField" name="idInput">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-  <Property name="columns" type="int" value="30"/>
+        <Property name="columns" type="int" value="30"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="nameInput">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-  <Property name="columns" type="int" value="30"/>
+        <Property name="columns" type="int" value="30"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nameInputActionPerformed"/>
@@ -170,25 +170,25 @@
     <Component class="javax.swing.JTextField" name="weightInput">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-  <Property name="columns" type="int" value="30"/>
+        <Property name="columns" type="int" value="30"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="birthDateInput">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-  <Property name="columns" type="int" value="20"/>
+        <Property name="columns" type="int" value="20"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="preferredFoodInput">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-  <Property name="columns" type="int" value="30"/>
+        <Property name="columns" type="int" value="30"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="swimSpeedInput">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-  <Property name="columns" type="int" value="30"/>
+        <Property name="columns" type="int" value="30"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="swimSpeedInputActionPerformed"/>

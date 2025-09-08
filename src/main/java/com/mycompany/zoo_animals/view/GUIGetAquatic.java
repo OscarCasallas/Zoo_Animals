@@ -5,9 +5,8 @@ import com.mycompany.zoo_animals.service.IAquaticService;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-
 public class GUIGetAquatic extends javax.swing.JFrame {
-    
+
     private IAquaticService aquaticService;
 
     public GUIGetAquatic(IAquaticService aquaticService) {
@@ -15,7 +14,7 @@ public class GUIGetAquatic extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -103,7 +102,7 @@ public class GUIGetAquatic extends javax.swing.JFrame {
     private void btnListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListActionPerformed
         List<Aquatic> aquatics = aquaticService.getAll();
         DefaultTableModel model = (DefaultTableModel) aquaticTable.getModel();
-        
+
         model.setRowCount(0);
 
         for (Aquatic a : aquatics) {

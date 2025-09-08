@@ -6,10 +6,11 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class GUICreateHabitat extends JFrame {
-    private IHabitatService habitatService; 
+
+    private IHabitatService habitatService;
 
     public GUICreateHabitat(IHabitatService habitatService) {
-        this(); 
+        this();
         this.habitatService = habitatService;
     }
 
@@ -69,7 +70,6 @@ public class GUICreateHabitat extends JFrame {
         setSize(340, 240);
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
 
     private void addBtnActionPerformed(ActionEvent evt) {
         if (habitatService == null) {

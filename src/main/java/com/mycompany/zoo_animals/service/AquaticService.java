@@ -7,7 +7,22 @@ import java.util.Optional;
 
 public class AquaticService implements IAquaticService {
     
+    // Singleton Pattern Implementation
+    private static AquaticService instance;
     private final List<Aquatic> aquaticAnimals = new ArrayList<>();
+    
+    // Constructor privado para evitar instanciación directa
+    private AquaticService() {
+        // Constructor privado
+    }
+    
+    // Método para obtener la única instancia (Thread-safe)
+    public static synchronized AquaticService getInstance() {
+        if (instance == null) {
+            instance = new AquaticService();
+        }
+        return instance;
+    }
 
     @Override
     public void add(Aquatic aquatic) throws IllegalArgumentException {

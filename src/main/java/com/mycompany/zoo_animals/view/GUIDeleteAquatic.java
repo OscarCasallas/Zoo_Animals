@@ -3,29 +3,32 @@ package com.mycompany.zoo_animals.view;
 import com.mycompany.zoo_animals.service.IAquaticService;
 
 public class GUIDeleteAquatic extends javax.swing.JFrame {
-    
+
     private IAquaticService aquaticService;
 
     public GUIDeleteAquatic(IAquaticService aquaticService) {
         this.aquaticService = aquaticService;
         initComponents();
         setLocationRelativeTo(null);
-        
+
         searchInput.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             @Override
             public void insertUpdate(javax.swing.event.DocumentEvent e) {
                 clearFields();
             }
+
             @Override
             public void removeUpdate(javax.swing.event.DocumentEvent e) {
                 clearFields();
             }
+
             @Override
             public void changedUpdate(javax.swing.event.DocumentEvent e) {
                 clearFields();
             }
         });
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -189,16 +192,16 @@ public class GUIDeleteAquatic extends javax.swing.JFrame {
     private void searchInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchInputActionPerformed
 
     }//GEN-LAST:event_searchInputActionPerformed
-     
+
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-         try {
+        try {
             String id = searchInput.getText().trim();
 
             if (id.isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "Por favor ingresa un ID.",
-                    "Error",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                        "Por favor ingresa un ID.",
+                        "Error",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -213,32 +216,32 @@ public class GUIDeleteAquatic extends javax.swing.JFrame {
                 swimSpeedInput.setText(String.valueOf(aquatic.getSwimSpeedKmh()));
 
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "Animal encontrado.",
-                    "Éxito",
-                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                        "Animal encontrado.",
+                        "Éxito",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
             }, () -> {
                 clearFields();
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "No se encontró un animal con ID " + id,
-                    "Error de búsqueda",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                        "No se encontró un animal con ID " + id,
+                        "Error de búsqueda",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
             });
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this,
-                e.getMessage(),
-                "Animal no encontrado",
-                javax.swing.JOptionPane.ERROR_MESSAGE);
+                    e.getMessage(),
+                    "Animal no encontrado",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
-        private void clearFields() {
+    private void clearFields() {
         idInput.setText("");
         nameInput.setText("");
         weightInput.setText("");
         birthDateInput.setText("");
         preferredFoodInput.setText("");
         swimSpeedInput.setText("");
-    } 
+    }
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
@@ -249,24 +252,24 @@ public class GUIDeleteAquatic extends javax.swing.JFrame {
 
             if (id.isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "Primero busca un animal antes de eliminar.",
-                    "Error",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                        "Primero busca un animal antes de eliminar.",
+                        "Error",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             int confirm = javax.swing.JOptionPane.showConfirmDialog(this,
-                "¿Estás seguro de eliminar el animal con ID " + id + "?",
-                "Confirmar eliminación",
-                javax.swing.JOptionPane.YES_NO_OPTION);
+                    "¿Estás seguro de eliminar el animal con ID " + id + "?",
+                    "Confirmar eliminación",
+                    javax.swing.JOptionPane.YES_NO_OPTION);
 
             if (confirm == javax.swing.JOptionPane.YES_OPTION) {
                 aquaticService.deleteById(id);
 
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "Animal eliminado correctamente.",
-                    "Éxito",
-                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                        "Animal eliminado correctamente.",
+                        "Éxito",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
                 clearFields();
                 searchInput.setText("");
@@ -274,9 +277,9 @@ public class GUIDeleteAquatic extends javax.swing.JFrame {
 
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this,
-                "Error al eliminar: " + e.getMessage(),
-                "Error",
-                javax.swing.JOptionPane.ERROR_MESSAGE);
+                    "Error al eliminar: " + e.getMessage(),
+                    "Error",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 

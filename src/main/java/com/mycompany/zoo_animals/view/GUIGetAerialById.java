@@ -14,7 +14,7 @@ import java.awt.Color;
  * @author santiagomanchola
  */
 public class GUIGetAerialById extends javax.swing.JFrame {
-    
+
     private IAerialService aerialService;
     private Aerial currentAerial;
 
@@ -25,17 +25,19 @@ public class GUIGetAerialById extends javax.swing.JFrame {
         this.aerialService = aerialService;
         initComponents();
         setLocationRelativeTo(null);
-    styleComponents();
-        
+        styleComponents();
+
         searchInput.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             @Override
             public void insertUpdate(javax.swing.event.DocumentEvent e) {
                 clearFields();
             }
+
             @Override
             public void removeUpdate(javax.swing.event.DocumentEvent e) {
                 clearFields();
             }
+
             @Override
             public void changedUpdate(javax.swing.event.DocumentEvent e) {
                 clearFields();
@@ -280,16 +282,16 @@ public class GUIGetAerialById extends javax.swing.JFrame {
             String id = searchInput.getText().trim();
             if (id.isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "Por favor ingresa un ID.",
-                    "Error",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                        "Por favor ingresa un ID.",
+                        "Error",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             var optionalAerial = aerialService.getById(id);
             optionalAerial.ifPresentOrElse(aerial -> {
                 this.currentAerial = aerial;
-                
+
                 idInput.setText(aerial.getId());
                 nameInput.setText(aerial.getName());
                 weightInput.setText(String.valueOf(aerial.getWeightKg()));
@@ -306,23 +308,23 @@ public class GUIGetAerialById extends javax.swing.JFrame {
                 }
 
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "Animal encontrado.",
-                    "Éxito",
-                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                        "Animal encontrado.",
+                        "Éxito",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
             }, () -> {
                 this.currentAerial = null;
                 clearFields();
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "No se encontró un animal con ID " + id,
-                    "Error de búsqueda",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                        "No se encontró un animal con ID " + id,
+                        "Error de búsqueda",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
             });
         } catch (Exception e) {
             this.currentAerial = null;
             javax.swing.JOptionPane.showMessageDialog(this,
-                e.getMessage(),
-                "Animal no encontrado",
-                javax.swing.JOptionPane.ERROR_MESSAGE);
+                    e.getMessage(),
+                    "Animal no encontrado",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -337,7 +339,7 @@ public class GUIGetAerialById extends javax.swing.JFrame {
         habitatAreaInput.setText("");
         climateInput.setText("");
     }
-    
+
     private void nameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameInputActionPerformed
@@ -355,29 +357,29 @@ public class GUIGetAerialById extends javax.swing.JFrame {
     }//GEN-LAST:event_cleanBtnActionPerformed
 
     private void computeBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_computeBtn1ActionPerformed
-       if (currentAerial == null) {
+        if (currentAerial == null) {
             javax.swing.JOptionPane.showMessageDialog(this,
-                "Primero debes buscar un animal.",
-                "Error",
-                javax.swing.JOptionPane.WARNING_MESSAGE);
+                    "Primero debes buscar un animal.",
+                    "Error",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-    try {
-        double careIndex = currentAerial.calculateCareIndex();
-        
-        javax.swing.JOptionPane.showMessageDialog(this,
-            String.format("Animal: %s\nÍndice de cuidado: %.2f puntos",
-                         currentAerial.getName(),
-                         careIndex),
-            "Índice de Cuidado",
-            javax.swing.JOptionPane.INFORMATION_MESSAGE);
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Error al calcular el índice de cuidado: " + e.getMessage(),
-            "Error",
-            javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
+        try {
+            double careIndex = currentAerial.calculateCareIndex();
+
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    String.format("Animal: %s\nÍndice de cuidado: %.2f puntos",
+                            currentAerial.getName(),
+                            careIndex),
+                    "Índice de Cuidado",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Error al calcular el índice de cuidado: " + e.getMessage(),
+                    "Error",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_computeBtn1ActionPerformed
 
     private void styleComponents() {
@@ -397,7 +399,7 @@ public class GUIGetAerialById extends javax.swing.JFrame {
             habitatNameInput, habitatAreaInput, climateInput
         };
         for (javax.swing.JTextField f : readOnly) {
-            f.setEnabled(true); 
+            f.setEnabled(true);
             f.setEditable(false);
             f.setBackground(Color.WHITE);
             f.setDisabledTextColor(Color.BLACK);

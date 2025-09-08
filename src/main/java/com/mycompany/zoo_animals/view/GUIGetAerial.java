@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
  * @author santiagomanchola
  */
 public class GUIGetAerial extends javax.swing.JFrame {
-    
+
     private IAerialService aerialService;
 
     /**
@@ -26,13 +26,13 @@ public class GUIGetAerial extends javax.swing.JFrame {
         this.aerialService = aerialService;
         initComponents();
         setLocationRelativeTo(null);
-    aerialTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-    int[] widths = {90, 120, 60, 160, 100, 165}; 
-    for (int i = 0; i < widths.length; i++) {
-        aerialTable.getColumnModel().getColumn(i).setPreferredWidth(widths[i]);
-    }
-    applyRightAlignment();
-    adjustSizeToTable();
+        aerialTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        int[] widths = {90, 120, 60, 160, 100, 165};
+        for (int i = 0; i < widths.length; i++) {
+            aerialTable.getColumnModel().getColumn(i).setPreferredWidth(widths[i]);
+        }
+        applyRightAlignment();
+        adjustSizeToTable();
     }
 
     /**
@@ -123,16 +123,16 @@ public class GUIGetAerial extends javax.swing.JFrame {
     private void btnListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListActionPerformed
         List<Aerial> aerials = aerialService.getAll();
         DefaultTableModel model = (DefaultTableModel) aerialTable.getModel();
-        
+
         model.setRowCount(0);
 
         for (Aerial a : aerials) {
             String habitatStr = "Ninguno";
             if (a.getHabitat() != null) {
                 habitatStr = String.format("%s | %.0f m² | %s",
-                    a.getHabitat().getName(),
-                    a.getHabitat().getAreaM2(),
-                    a.getHabitat().getClimate()
+                        a.getHabitat().getName(),
+                        a.getHabitat().getAreaM2(),
+                        a.getHabitat().getClimate()
                 );
             } else {
                 habitatStr = "Ninguno";
@@ -146,7 +146,7 @@ public class GUIGetAerial extends javax.swing.JFrame {
                 habitatStr
             });
         }
-    adjustSizeToTable();
+        adjustSizeToTable();
     }//GEN-LAST:event_btnListActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
@@ -159,10 +159,10 @@ public class GUIGetAerial extends javax.swing.JFrame {
             totalWidth += aerialTable.getColumnModel().getColumn(i).getPreferredWidth();
         }
         int headerHeight = aerialTable.getTableHeader().getPreferredSize().height;
-        int visibleRows = Math.min(Math.max(aerialTable.getRowCount(), 6), 12); 
+        int visibleRows = Math.min(Math.max(aerialTable.getRowCount(), 6), 12);
         int rowHeight = aerialTable.getRowHeight();
         int tableHeight = headerHeight + (visibleRows * rowHeight) + 4;
-        java.awt.Dimension d = new java.awt.Dimension(totalWidth + 40, tableHeight + 70); 
+        java.awt.Dimension d = new java.awt.Dimension(totalWidth + 40, tableHeight + 70);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(d.width - 40, tableHeight));
         pack();
         setLocationRelativeTo(null);

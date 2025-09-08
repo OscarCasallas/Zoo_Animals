@@ -13,7 +13,7 @@ import java.awt.Color;
  * @author santiagomanchola
  */
 public class GUIDeleteAerial extends javax.swing.JFrame {
-    
+
     private IAerialService aerialService;
 
     /**
@@ -23,17 +23,19 @@ public class GUIDeleteAerial extends javax.swing.JFrame {
         this.aerialService = aerialService;
         initComponents();
         setLocationRelativeTo(null);
-    styleComponents();
-        
+        styleComponents();
+
         searchInput.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             @Override
             public void insertUpdate(javax.swing.event.DocumentEvent e) {
                 clearFields();
             }
+
             @Override
             public void removeUpdate(javax.swing.event.DocumentEvent e) {
                 clearFields();
             }
+
             @Override
             public void changedUpdate(javax.swing.event.DocumentEvent e) {
                 clearFields();
@@ -267,9 +269,9 @@ public class GUIDeleteAerial extends javax.swing.JFrame {
 
             if (id.isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "Por favor ingresa un ID.",
-                    "Error",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                        "Por favor ingresa un ID.",
+                        "Error",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -292,22 +294,22 @@ public class GUIDeleteAerial extends javax.swing.JFrame {
                 }
 
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "Animal encontrado.",
-                    "Éxito",
-                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                        "Animal encontrado.",
+                        "Éxito",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
             }, () -> {
                 clearFields();
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "No se encontró un animal con ID " + id,
-                    "Error de búsqueda",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                        "No se encontró un animal con ID " + id,
+                        "Error de búsqueda",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
             });
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this,
-                e.getMessage(),
-                "Animal no encontrado",
-                javax.swing.JOptionPane.ERROR_MESSAGE);
+                    e.getMessage(),
+                    "Animal no encontrado",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -321,7 +323,7 @@ public class GUIDeleteAerial extends javax.swing.JFrame {
         habitatAreaInput.setText("");
         climateInput.setText("");
     }
-    
+
     private void nameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameInputActionPerformed
@@ -340,24 +342,24 @@ public class GUIDeleteAerial extends javax.swing.JFrame {
 
             if (id.isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "Primero busca un animal antes de eliminar.",
-                    "Error",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                        "Primero busca un animal antes de eliminar.",
+                        "Error",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             int confirm = javax.swing.JOptionPane.showConfirmDialog(this,
-                "¿Estás seguro de eliminar el animal con ID " + id + "?",
-                "Confirmar eliminación",
-                javax.swing.JOptionPane.YES_NO_OPTION);
+                    "¿Estás seguro de eliminar el animal con ID " + id + "?",
+                    "Confirmar eliminación",
+                    javax.swing.JOptionPane.YES_NO_OPTION);
 
             if (confirm == javax.swing.JOptionPane.YES_OPTION) {
                 aerialService.deleteById(id);
 
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "Animal eliminado correctamente.",
-                    "Éxito",
-                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                        "Animal eliminado correctamente.",
+                        "Éxito",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
                 clearFields();
                 searchInput.setText("");
@@ -365,10 +367,10 @@ public class GUIDeleteAerial extends javax.swing.JFrame {
 
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this,
-                "Error al eliminar: " + e.getMessage(),
-                "Error",
-                javax.swing.JOptionPane.ERROR_MESSAGE);
-        }        
+                    "Error al eliminar: " + e.getMessage(),
+                    "Error",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
@@ -392,7 +394,7 @@ public class GUIDeleteAerial extends javax.swing.JFrame {
             habitatNameInput, habitatAreaInput, climateInput
         };
         for (javax.swing.JTextField f : readOnly) {
-            f.setEnabled(true); 
+            f.setEnabled(true);
             f.setEditable(false);
             f.setBackground(Color.WHITE);
             f.setDisabledTextColor(Color.BLACK);

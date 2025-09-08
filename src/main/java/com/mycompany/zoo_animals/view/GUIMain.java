@@ -7,7 +7,9 @@ package com.mycompany.zoo_animals.view;
 import com.mycompany.zoo_animals.service.IAerialService;
 import com.mycompany.zoo_animals.service.AerialService;
 import com.mycompany.zoo_animals.service.IAquaticService;
+import com.mycompany.zoo_animals.service.HabitatService;
 import com.mycompany.zoo_animals.service.AquaticService;
+import com.mycompany.zoo_animals.service.IHabitatService;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,9 +18,10 @@ import javax.swing.JOptionPane;
  */
 public class GUIMain extends javax.swing.JFrame {
     
-    IAerialService aerialService = new AerialService();
-    IAquaticService aquaticService = new AquaticService();
-    com.mycompany.zoo_animals.service.IHabitatService habitatService = new com.mycompany.zoo_animals.service.HabitatService();
+    // Utilizando el patrón Singleton para los servicios
+    IAerialService aerialService = AerialService.getInstance();
+    IAquaticService aquaticService = AquaticService.getInstance();
+    IHabitatService habitatService = HabitatService.getInstance();
 
     /**
      * Creates new form GUIMain

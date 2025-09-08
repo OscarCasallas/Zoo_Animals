@@ -8,7 +8,8 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 
 public class GUIGetHabitat extends JFrame {
-    private IHabitatService habitatService; 
+
+    private IHabitatService habitatService;
 
     public GUIGetHabitat(IHabitatService habitatService) {
         this();
@@ -81,7 +82,9 @@ public class GUIGetHabitat extends JFrame {
     // </editor-fold>
 
     private void listBtnActionPerformed(ActionEvent evt) {
-        if (habitatService == null) return; 
+        if (habitatService == null) {
+            return;
+        }
         List<Habitat> habitats = habitatService.getAll();
         DefaultTableModel model = (DefaultTableModel) habitatTable.getModel();
         model.setRowCount(0);

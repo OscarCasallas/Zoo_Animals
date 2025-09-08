@@ -4,7 +4,7 @@ import com.mycompany.zoo_animals.model.Aquatic;
 import com.mycompany.zoo_animals.service.IAquaticService;
 
 public class GUIGetAquaticById extends javax.swing.JFrame {
-    
+
     private IAquaticService aquaticService;
     private Aquatic currentAquatic;
 
@@ -12,23 +12,25 @@ public class GUIGetAquaticById extends javax.swing.JFrame {
         this.aquaticService = aquaticService;
         initComponents();
         setLocationRelativeTo(null);
-        
+
         searchInput.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             @Override
             public void insertUpdate(javax.swing.event.DocumentEvent e) {
                 clearFields();
             }
+
             @Override
             public void removeUpdate(javax.swing.event.DocumentEvent e) {
                 clearFields();
             }
+
             @Override
             public void changedUpdate(javax.swing.event.DocumentEvent e) {
                 clearFields();
             }
         });
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -215,45 +217,45 @@ public class GUIGetAquaticById extends javax.swing.JFrame {
     }//GEN-LAST:event_searchInputActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-      try {
+        try {
             String id = searchInput.getText().trim();
             if (id.isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "Por favor ingresa un ID.",
-                    "Error",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                        "Por favor ingresa un ID.",
+                        "Error",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             var optionalAquatic = aquaticService.getById(id);
             optionalAquatic.ifPresentOrElse(aquatic -> {
                 this.currentAquatic = aquatic;
-                
+
                 idInput.setText(aquatic.getId());
                 nameInput.setText(aquatic.getName());
                 weightInput.setText(String.valueOf(aquatic.getWeightKg()));
                 birthDateInput.setText(aquatic.getBirthDate().toString());
                 preferredFoodInput.setText(aquatic.getPreferredFood());
                 swimSpeedInput.setText(String.valueOf(aquatic.getSwimSpeedKmh()));
-                
+
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "Animal encontrado.",
-                    "Éxito",
-                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                        "Animal encontrado.",
+                        "Éxito",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
             }, () -> {
                 this.currentAquatic = null;
                 clearFields();
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "No se encontró un animal con ID " + id,
-                    "Error de búsqueda",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                        "No se encontró un animal con ID " + id,
+                        "Error de búsqueda",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
             });
         } catch (Exception e) {
             this.currentAquatic = null;
             javax.swing.JOptionPane.showMessageDialog(this,
-                e.getMessage(),
-                "Animal no encontrado",
-                javax.swing.JOptionPane.ERROR_MESSAGE);
+                    e.getMessage(),
+                    "Animal no encontrado",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
     private void clearFields() {
@@ -278,29 +280,29 @@ public class GUIGetAquaticById extends javax.swing.JFrame {
     }//GEN-LAST:event_cleanBtnActionPerformed
 
     private void computeBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_computeBtn1ActionPerformed
-    if (currentAquatic == null) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Primero debes buscar un animal.",
-            "Error",
-            javax.swing.JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+        if (currentAquatic == null) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Primero debes buscar un animal.",
+                    "Error",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-    try {
-        double careIndex = currentAquatic.calculateCareIndex();
-        
-        javax.swing.JOptionPane.showMessageDialog(this,
-            String.format("Animal: %s\nÍndice de cuidado: %.2f puntos",
-                         currentAquatic.getName(),
-                         careIndex),
-            "Índice de Cuidado",
-            javax.swing.JOptionPane.INFORMATION_MESSAGE);
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Error al calcular el índice de cuidado: " + e.getMessage(),
-            "Error",
-            javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
+        try {
+            double careIndex = currentAquatic.calculateCareIndex();
+
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    String.format("Animal: %s\nÍndice de cuidado: %.2f puntos",
+                            currentAquatic.getName(),
+                            careIndex),
+                    "Índice de Cuidado",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Error al calcular el índice de cuidado: " + e.getMessage(),
+                    "Error",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_computeBtn1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

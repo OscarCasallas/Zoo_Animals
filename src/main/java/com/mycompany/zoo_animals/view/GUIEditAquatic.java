@@ -5,7 +5,7 @@ import com.mycompany.zoo_animals.service.IAquaticService;
 import javax.swing.text.PlainDocument;
 
 public class GUIEditAquatic extends javax.swing.JFrame {
-    
+
     private IAquaticService aquaticService;
 
     public GUIEditAquatic(IAquaticService aquaticService) {
@@ -14,30 +14,31 @@ public class GUIEditAquatic extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setFieldsEditable(false);
         setupFieldValidations();
-        
+
         inputSearch.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             @Override
             public void insertUpdate(javax.swing.event.DocumentEvent e) {
                 clearFields();
             }
+
             @Override
             public void removeUpdate(javax.swing.event.DocumentEvent e) {
                 clearFields();
             }
+
             @Override
             public void changedUpdate(javax.swing.event.DocumentEvent e) {
                 clearFields();
             }
         });
     }
-    
+
     private void setFieldsEditable(boolean editable) {
         nameInput.setEditable(editable);
         nameInput.setFocusable(editable);
 
         weightInput.setEditable(editable);
         weightInput.setFocusable(editable);
-
 
         preferredFoodInput.setEditable(editable);
         preferredFoodInput.setFocusable(editable);
@@ -62,10 +63,8 @@ public class GUIEditAquatic extends javax.swing.JFrame {
         idInput = new javax.swing.JTextField();
         nameInput = new javax.swing.JTextField();
         weightInput = new javax.swing.JTextField();
-    birthDateInput = new javax.swing.JTextField();
-    birthDateInput.setEditable(false);
-    birthDateInput.setFocusable(false);
-    birthDatePickerBtn = new javax.swing.JButton();
+        birthDateInput = new javax.swing.JTextField();
+        birthDatePickerBtn = new javax.swing.JButton();
         preferredFoodInput = new javax.swing.JTextField();
         swimSpeedInput = new javax.swing.JTextField();
         btnEdit = new javax.swing.JButton();
@@ -73,6 +72,7 @@ public class GUIEditAquatic extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar animal acuatico");
 
+        inputSearch.setColumns(35);
         inputSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputSearchActionPerformed(evt);
@@ -93,14 +93,6 @@ public class GUIEditAquatic extends javax.swing.JFrame {
         jLabel2.setText("Peso");
 
         jLabel3.setText("Fecha de nacimiento");
-    birthDatePickerBtn.setText("📅");
-        birthDatePickerBtn.setToolTipText("Seleccionar fecha");
-        birthDatePickerBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                var chosen = DatePickerUtil.pickDate(GUIEditAquatic.this, parseDateSafely(birthDateInput.getText()));
-                if (chosen != null) birthDateInput.setText(chosen.toString());
-            }
-        });
 
         jLabel4.setText("Alimentación preferida");
 
@@ -114,13 +106,26 @@ public class GUIEditAquatic extends javax.swing.JFrame {
         });
 
         idInput.setEditable(false);
+        idInput.setColumns(30);
 
+        nameInput.setColumns(30);
         nameInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameInputActionPerformed(evt);
             }
         });
 
+        weightInput.setColumns(30);
+
+        birthDateInput.setEditable(false);
+        birthDateInput.setColumns(20);
+
+        birthDatePickerBtn.setText("📅");
+        birthDatePickerBtn.setToolTipText("Seleccionar fecha");
+
+        preferredFoodInput.setColumns(30);
+
+        swimSpeedInput.setColumns(30);
         swimSpeedInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 swimSpeedInputActionPerformed(evt);
@@ -145,8 +150,7 @@ public class GUIEditAquatic extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(inputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnClose)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -159,17 +163,17 @@ public class GUIEditAquatic extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(swimSpeedInput, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
-                            .addComponent(preferredFoodInput)
-                            .addGroup(layout.createSequentialGroup()
+                            .addComponent(swimSpeedInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                            .addComponent(preferredFoodInput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(birthDateInput)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(birthDatePickerBtn))
-                            .addComponent(weightInput)
-                            .addComponent(nameInput)
-                            .addComponent(idInput))))
+                            .addComponent(weightInput, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nameInput, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(idInput, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -179,9 +183,9 @@ public class GUIEditAquatic extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idInput, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(idLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -191,11 +195,12 @@ public class GUIEditAquatic extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(weightInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(birthDateInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(birthDatePickerBtn))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(birthDateInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(birthDatePickerBtn))
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(preferredFoodInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,7 +209,7 @@ public class GUIEditAquatic extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(swimSpeedInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClose)
                     .addComponent(btnEdit))
@@ -213,24 +218,23 @@ public class GUIEditAquatic extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void setupFieldValidations() {
 
-    ((PlainDocument) nameInput.getDocument()).setDocumentFilter(new TextOnlyDocumentFilter());
-    ((PlainDocument) preferredFoodInput.getDocument()).setDocumentFilter(new TextOnlyDocumentFilter());
+        ((PlainDocument) nameInput.getDocument()).setDocumentFilter(new TextOnlyDocumentFilter());
+        ((PlainDocument) preferredFoodInput.getDocument()).setDocumentFilter(new TextOnlyDocumentFilter());
 
-    
-    ((PlainDocument) weightInput.getDocument()).setDocumentFilter(new NumericDocumentFilter());
-    ((PlainDocument) swimSpeedInput.getDocument()).setDocumentFilter(new NumericDocumentFilter());
-    
-    ((PlainDocument) idInput.getDocument()).setDocumentFilter(new AlphanumericDocumentFilter());
-    
-    nameInput.setToolTipText("Solo letras y espacios");
-    preferredFoodInput.setToolTipText("Solo letras y espacios");
-    weightInput.setToolTipText("Solo números (ejemplo: 12.5)");
-    swimSpeedInput.setToolTipText("Solo números (ejemplo: 2.5)");
-    idInput.setToolTipText("Solo letras y números");
-}
+        ((PlainDocument) weightInput.getDocument()).setDocumentFilter(new NumericDocumentFilter());
+        ((PlainDocument) swimSpeedInput.getDocument()).setDocumentFilter(new NumericDocumentFilter());
+
+        ((PlainDocument) idInput.getDocument()).setDocumentFilter(new AlphanumericDocumentFilter());
+
+        nameInput.setToolTipText("Solo letras y espacios");
+        preferredFoodInput.setToolTipText("Solo letras y espacios");
+        weightInput.setToolTipText("Solo números (ejemplo: 12.5)");
+        swimSpeedInput.setToolTipText("Solo números (ejemplo: 2.5)");
+        idInput.setToolTipText("Solo letras y números");
+    }
     private void inputSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSearchActionPerformed
 
     }//GEN-LAST:event_inputSearchActionPerformed
@@ -241,9 +245,9 @@ public class GUIEditAquatic extends javax.swing.JFrame {
 
             if (id.isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "Por favor ingrese un ID.",
-                    "Error",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                        "Por favor ingrese un ID.",
+                        "Error",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -254,27 +258,27 @@ public class GUIEditAquatic extends javax.swing.JFrame {
                 birthDateInput.setText(aquatic.getBirthDate().toString());
                 preferredFoodInput.setText(aquatic.getPreferredFood());
                 swimSpeedInput.setText(String.valueOf(aquatic.getSwimSpeedKmh()));
-                
+
                 setFieldsEditable(true);
 
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "Animal encontrado y campos poblados.",
-                    "Éxito",
-                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                        "Animal encontrado y campos poblados.",
+                        "Éxito",
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
             }, () -> {
                 clearFields();
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "No se encontró un animal con ID " + id,
-                    "Error de búsqueda",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                        "No se encontró un animal con ID " + id,
+                        "Error de búsqueda",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
             });
 
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this,
-                e.getMessage(),
-                "Error de búsqueda",
-                javax.swing.JOptionPane.ERROR_MESSAGE);
+                    e.getMessage(),
+                    "Error de búsqueda",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -291,28 +295,28 @@ public class GUIEditAquatic extends javax.swing.JFrame {
     }//GEN-LAST:event_swimSpeedInputActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-         try {
+        try {
             Aquatic aquatic = new Aquatic(
-                idInput.getText().trim(),
-                nameInput.getText().trim(),
-                Double.parseDouble(weightInput.getText().trim()),
-                java.time.LocalDate.parse(birthDateInput.getText().trim()),
-                preferredFoodInput.getText().trim(),
-                Double.parseDouble(swimSpeedInput.getText().trim())
+                    idInput.getText().trim(),
+                    nameInput.getText().trim(),
+                    Double.parseDouble(weightInput.getText().trim()),
+                    java.time.LocalDate.parse(birthDateInput.getText().trim()),
+                    preferredFoodInput.getText().trim(),
+                    Double.parseDouble(swimSpeedInput.getText().trim())
             );
 
             aquaticService.update(aquatic);
 
             javax.swing.JOptionPane.showMessageDialog(this,
-                "Animal actualizado correctamente.",
-                "Éxito",
-                javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    "Animal actualizado correctamente.",
+                    "Éxito",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this,
-                "Error al actualizar: " + e.getMessage(),
-                "Error",
-                javax.swing.JOptionPane.ERROR_MESSAGE);
+                    "Error al actualizar: " + e.getMessage(),
+                    "Error",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEditActionPerformed
     private void clearFields() {
@@ -327,9 +331,16 @@ public class GUIEditAquatic extends javax.swing.JFrame {
     }
 
     private java.time.LocalDate parseDateSafely(String txt) {
-        try { if (txt == null || txt.isBlank()) return null; return java.time.LocalDate.parse(txt.trim()); } catch (Exception e) { return null; }
+        try {
+            if (txt == null || txt.isBlank()) {
+                return null;
+            }
+            return java.time.LocalDate.parse(txt.trim());
+        } catch (Exception e) {
+            return null;
+        }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField birthDateInput;
     private javax.swing.JButton birthDatePickerBtn;

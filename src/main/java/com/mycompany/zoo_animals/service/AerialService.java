@@ -7,7 +7,22 @@ import java.util.Optional;
 
 public class AerialService implements IAerialService {
     
+    // Singleton Pattern Implementation
+    private static AerialService instance;
     private final List<Aerial> aerialAnimals = new ArrayList<>();
+    
+    // Constructor privado para evitar instanciación directa
+    private AerialService() {
+        // Constructor privado
+    }
+    
+    // Método para obtener la única instancia (Thread-safe)
+    public static synchronized AerialService getInstance() {
+        if (instance == null) {
+            instance = new AerialService();
+        }
+        return instance;
+    }
 
     @Override
     public void add(Aerial aerial) throws IllegalArgumentException {

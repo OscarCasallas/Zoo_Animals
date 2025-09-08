@@ -7,8 +7,9 @@ import java.awt.event.ActionEvent;
 import java.util.Optional;
 
 public class GUIEditHabitat extends JFrame {
-    private IHabitatService habitatService; 
-    private String originalName; 
+
+    private IHabitatService habitatService;
+    private String originalName;
 
     public GUIEditHabitat(IHabitatService habitatService) {
         this();
@@ -99,7 +100,9 @@ public class GUIEditHabitat extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchBtnActionPerformed(ActionEvent evt) {
-        if (habitatService == null) return; // modo diseño
+        if (habitatService == null) {
+            return; // modo diseño
+        }
         String name = searchInput.getText().trim();
         Optional<Habitat> habitatOpt = habitatService.getByName(name);
         if (habitatOpt.isPresent()) {
@@ -118,7 +121,9 @@ public class GUIEditHabitat extends JFrame {
     }
 
     private void editBtnActionPerformed(ActionEvent evt) {
-        if (habitatService == null) return; 
+        if (habitatService == null) {
+            return;
+        }
         try {
             String name = nameInput.getText().trim();
             double area = Double.parseDouble(areaInput.getText().trim());
@@ -130,7 +135,7 @@ public class GUIEditHabitat extends JFrame {
             Habitat habitat = new Habitat(name, area, climate);
             if (!originalName.equalsIgnoreCase(name)) {
                 habitatService.updateByOriginalName(originalName, habitat);
-                originalName = name; 
+                originalName = name;
             } else {
                 habitatService.update(habitat);
             }

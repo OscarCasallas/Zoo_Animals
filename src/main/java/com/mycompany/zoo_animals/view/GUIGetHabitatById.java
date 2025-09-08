@@ -7,7 +7,9 @@ import java.awt.event.ActionEvent;
 import java.util.Optional;
 
 public class GUIGetHabitatById extends JFrame {
-    private IHabitatService habitatService; 
+
+    private IHabitatService habitatService;
+
     public GUIGetHabitatById(IHabitatService habitatService) {
         this();
         this.habitatService = habitatService;
@@ -94,7 +96,9 @@ public class GUIGetHabitatById extends JFrame {
     // </editor-fold>
 
     private void searchBtnActionPerformed(ActionEvent evt) {
-        if (habitatService == null) return; 
+        if (habitatService == null) {
+            return;
+        }
         String name = searchInput.getText().trim();
         Optional<Habitat> habitatOpt = habitatService.getByName(name);
         if (habitatOpt.isPresent()) {
