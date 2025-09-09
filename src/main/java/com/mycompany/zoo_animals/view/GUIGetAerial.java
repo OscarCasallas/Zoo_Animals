@@ -1,10 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.zoo_animals.view;
 
 import com.mycompany.zoo_animals.model.Aerial;
+import com.mycompany.zoo_animals.model.Aquatic;
+import com.mycompany.zoo_animals.service.AerialService;
+import com.mycompany.zoo_animals.service.AquaticService;
 import com.mycompany.zoo_animals.service.IAerialService;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -15,7 +14,7 @@ import javax.swing.SwingConstants;
  *
  * @author santiagomanchola
  */
-public class GUIGetAerial extends javax.swing.JFrame {
+public class GUIGetAerial extends javax.swing.JFrame implements IActualizable{
 
     private IAerialService aerialService;
 
@@ -33,6 +32,12 @@ public class GUIGetAerial extends javax.swing.JFrame {
         }
         applyRightAlignment();
         adjustSizeToTable();
+        
+                //Me registro como observador
+        ((AerialService) aerialService).addObserver(this);
+
+        // Cargo datos iniciales
+        actualizar();
     }
 
     /**
@@ -121,38 +126,32 @@ public class GUIGetAerial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListActionPerformed
-        List<Aerial> aerials = aerialService.getAll();
-        DefaultTableModel model = (DefaultTableModel) aerialTable.getModel();
-
-        model.setRowCount(0);
-
-        for (Aerial a : aerials) {
-            String habitatStr = "Ninguno";
-            if (a.getHabitat() != null) {
-                habitatStr = String.format("%s | %.0f m² | %s",
-                        a.getHabitat().getName(),
-                        a.getHabitat().getAreaM2(),
-                        a.getHabitat().getClimate()
-                );
-            } else {
-                habitatStr = "Ninguno";
-            }
-            model.addRow(new Object[]{
-                a.getId(),
-                a.getName(),
-                a.getWeightKg(),
-                a.getBirthDate(),
-                a.getWingspan(),
-                habitatStr
-            });
-        }
-        adjustSizeToTable();
+        actualizar();
     }//GEN-LAST:event_btnListActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 
+         @Override
+    public void actualizar() {
+        List<Aerial> aerials = aerialService.getAll();
+        DefaultTableModel model = (DefaultTableModel) aerialTable.getModel();
+
+        model.setRowCount(0);
+
+        for (Aerial a : aerials) {
+            model.addRow(new Object[]{
+                a.getId(),
+                a.getName(),
+                a.getWeightKg(),
+                a.getBirthDate(),
+                a.getWingspan(),
+                a.getHabitat()
+            });
+        }
+    }
+    
     private void adjustSizeToTable() {
         int totalWidth = 0;
         for (int i = 0; i < aerialTable.getColumnCount(); i++) {

@@ -1,6 +1,7 @@
 package com.mycompany.zoo_animals.service;
 
 import com.mycompany.zoo_animals.model.Aerial;
+import com.mycompany.zoo_animals.view.IActualizable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +11,9 @@ public class AerialService implements IAerialService {
     // Singleton Pattern Implementation
     private static AerialService instance;
     private final List<Aerial> aerialAnimals = new ArrayList<>();
+    
+    private final List<IActualizable> observers = new ArrayList<>();
+
     
     // Constructor privado para evitar instanciación directa
     private AerialService() {
@@ -24,6 +28,21 @@ public class AerialService implements IAerialService {
         return instance;
     }
 
+    
+    // 👀 Métodos para manejar observadores
+    public void addObserver(IActualizable observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(IActualizable observer) {
+        observers.remove(observer);
+    }
+
+    private void notificar() {
+        observers.forEach(IActualizable::actualizar);
+    }
+    
+    
     @Override
     public void add(Aerial aerial) throws IllegalArgumentException {
         if (existsById(aerial.getId())) {

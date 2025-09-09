@@ -1,11 +1,12 @@
 package com.mycompany.zoo_animals.view;
 
 import com.mycompany.zoo_animals.model.Aquatic;
+import com.mycompany.zoo_animals.service.AquaticService;
 import com.mycompany.zoo_animals.service.IAquaticService;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-public class GUIGetAquatic extends javax.swing.JFrame {
+public class GUIGetAquatic extends javax.swing.JFrame implements IActualizable {
 
     private IAquaticService aquaticService;
 
@@ -13,6 +14,12 @@ public class GUIGetAquatic extends javax.swing.JFrame {
         this.aquaticService = aquaticService;
         initComponents();
         setLocationRelativeTo(null);
+        
+        //Me registro como observador
+        ((AquaticService) aquaticService).addObserver(this);
+
+        // Cargo datos iniciales
+        actualizar();
     }
 
     @SuppressWarnings("unchecked")
@@ -100,6 +107,11 @@ public class GUIGetAquatic extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListActionPerformed
+        actualizar();
+    }//GEN-LAST:event_btnListActionPerformed
+
+     @Override
+    public void actualizar() {
         List<Aquatic> aquatics = aquaticService.getAll();
         DefaultTableModel model = (DefaultTableModel) aquaticTable.getModel();
 
@@ -115,8 +127,7 @@ public class GUIGetAquatic extends javax.swing.JFrame {
                 a.getSwimSpeedKmh()
             });
         }
-    }//GEN-LAST:event_btnListActionPerformed
-
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable aquaticTable;
     private javax.swing.JButton btnClose;

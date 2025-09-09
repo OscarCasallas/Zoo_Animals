@@ -1,6 +1,7 @@
 package com.mycompany.zoo_animals.service;
 
 import com.mycompany.zoo_animals.model.Aquatic;
+import com.mycompany.zoo_animals.view.IActualizable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +11,9 @@ public class AquaticService implements IAquaticService {
     // Singleton Pattern Implementation
     private static AquaticService instance;
     private final List<Aquatic> aquaticAnimals = new ArrayList<>();
+    
+    private final List<IActualizable> observers = new ArrayList<>();
+
     
     // Constructor privado para evitar instanciación directa
     private AquaticService() {
@@ -24,6 +28,23 @@ public class AquaticService implements IAquaticService {
         return instance;
     }
 
+    
+    
+    // Métodos para manejar observadores
+    public void addObserver(IActualizable observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(IActualizable observer) {
+        observers.remove(observer);
+    }
+
+    private void notificar() {
+        observers.forEach(IActualizable::actualizar);
+    }
+    
+    
+    
     @Override
     public void add(Aquatic aquatic) throws IllegalArgumentException {
         if (existsById(aquatic.getId())) {
@@ -33,6 +54,7 @@ public class AquaticService implements IAquaticService {
             );
         }
         aquaticAnimals.add(aquatic);
+        notificar();
     }
 
     @Override
@@ -50,6 +72,7 @@ public class AquaticService implements IAquaticService {
     @Override
     public void deleteById(String id) {
         aquaticAnimals.removeIf(a -> a.getId().equalsIgnoreCase(id));
+        notificar();
     }
 
     @Override
@@ -66,6 +89,9 @@ public class AquaticService implements IAquaticService {
         existing.setName(updatedAquatic.getName());
         existing.setWeightKg(updatedAquatic.getWeightKg());
         existing.setBirthDate(updatedAquatic.getBirthDate());
+        
+        notificar();
+
     }
 
     @Override
