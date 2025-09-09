@@ -52,6 +52,7 @@ public class AerialService implements IAerialService {
             );
         }
         aerialAnimals.add(aerial);
+        notificar();
     }
 
     @Override
@@ -69,6 +70,7 @@ public class AerialService implements IAerialService {
     @Override
     public void deleteById(String id) {
         aerialAnimals.removeIf(a -> a.getId().equalsIgnoreCase(id));
+        notificar();
     }
 
     @Override
@@ -87,6 +89,8 @@ public class AerialService implements IAerialService {
         existing.setBirthDate(updatedAerial.getBirthDate());
         existing.setWingspan(updatedAerial.getWingspan());
         existing.setHabitat(updatedAerial.getHabitat());
+        
+        notificar();
     }
 
     @Override
