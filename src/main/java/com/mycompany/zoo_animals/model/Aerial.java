@@ -7,6 +7,7 @@ package com.mycompany.zoo_animals.model;
 import java.time.LocalDate;
 
 public class Aerial extends Animal {
+
     private double wingspan; // en metros
     private Habitat habitat;
 

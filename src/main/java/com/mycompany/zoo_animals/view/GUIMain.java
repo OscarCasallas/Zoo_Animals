@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author santiagomanchola
  */
 public class GUIMain extends javax.swing.JFrame {
-    
+
     // Utilizando el patrón Singleton para los servicios
     IAerialService aerialService = AerialService.getInstance();
     IAquaticService aquaticService = AquaticService.getInstance();
@@ -34,20 +34,20 @@ public class GUIMain extends javax.swing.JFrame {
         if (jMenuHabitat != null) {
             jMenuHabitat.setVisible(true);
         }
-        
-        java.net.URL imageUrl = getClass().getResource("/images/zoo.png"); 
+
+        java.net.URL imageUrl = getClass().getResource("/images/zoo.png");
         if (imageUrl != null) {
             javax.swing.ImageIcon originalIcon = new javax.swing.ImageIcon(imageUrl);
 
             java.awt.Image scaledImage = originalIcon.getImage().getScaledInstance(
-                    jLabel2.getWidth(), 
-                    jLabel2.getHeight(), 
+                    jLabel2.getWidth(),
+                    jLabel2.getHeight(),
                     java.awt.Image.SCALE_SMOOTH
             );
 
             jLabel2.setIcon(new javax.swing.ImageIcon(scaledImage));
             jLabel2.setText(""); // Quita el texto "jLabel2"
-        }        
+        }
     }
 
     /**
@@ -274,12 +274,12 @@ public class GUIMain extends javax.swing.JFrame {
     }//GEN-LAST:event_getByIdAerialActionPerformed
 
     private void createAerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAerialActionPerformed
-    GUICreateAerial gui = new GUICreateAerial(aerialService, habitatService);
+        GUICreateAerial gui = new GUICreateAerial(aerialService, habitatService);
         gui.setVisible(true);
     }//GEN-LAST:event_createAerialActionPerformed
 
     private void editAerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAerialActionPerformed
-    GUIEditAerial gui = new GUIEditAerial(aerialService, habitatService);
+        GUIEditAerial gui = new GUIEditAerial(aerialService, habitatService);
         gui.setVisible(true);
     }//GEN-LAST:event_editAerialActionPerformed
 
@@ -314,11 +314,11 @@ public class GUIMain extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         int confirm = JOptionPane.showConfirmDialog(
-            this, 
-            "¿Está seguro que desea salir del sistema?", 
-            "Confirmar salida", 
-            JOptionPane.YES_NO_OPTION, 
-            JOptionPane.QUESTION_MESSAGE
+                this,
+                "¿Está seguro que desea salir del sistema?",
+                "Confirmar salida",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
         );
 
         if (confirm == JOptionPane.YES_OPTION) {

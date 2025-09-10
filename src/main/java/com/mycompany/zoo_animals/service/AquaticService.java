@@ -7,19 +7,18 @@ import java.util.List;
 import java.util.Optional;
 
 public class AquaticService implements IAquaticService {
-    
+
     // Singleton Pattern Implementation
     private static AquaticService instance;
     private final List<Aquatic> aquaticAnimals = new ArrayList<>();
-    
+
     private final List<IActualizable> observers = new ArrayList<>();
 
-    
     // Constructor privado para evitar instanciación directa
     private AquaticService() {
         // Constructor privado
     }
-    
+
     // Método para obtener la única instancia (Thread-safe)
     public static synchronized AquaticService getInstance() {
         if (instance == null) {
@@ -28,8 +27,6 @@ public class AquaticService implements IAquaticService {
         return instance;
     }
 
-    
-    
     // Métodos para manejar observadores
     public void addObserver(IActualizable observer) {
         observers.add(observer);
@@ -42,15 +39,13 @@ public class AquaticService implements IAquaticService {
     private void notificar() {
         observers.forEach(IActualizable::actualizar);
     }
-    
-    
-    
+
     @Override
     public void add(Aquatic aquatic) throws IllegalArgumentException {
         if (existsById(aquatic.getId())) {
             throw new IllegalArgumentException(
-                "Ya existe un animal acuático con el ID: " + aquatic.getId() + 
-                ". Por favor usa un identificador diferente."
+                    "Ya existe un animal acuático con el ID: " + aquatic.getId()
+                    + ". Por favor usa un identificador diferente."
             );
         }
         aquaticAnimals.add(aquatic);
@@ -78,18 +73,18 @@ public class AquaticService implements IAquaticService {
     @Override
     public void update(Aquatic updatedAquatic) throws IllegalArgumentException {
         Optional<Aquatic> existingOpt = getById(updatedAquatic.getId());
-        
+
         if (existingOpt.isEmpty()) {
             throw new IllegalArgumentException(
-                "No se encontró un animal acuático con el ID: " + updatedAquatic.getId()
+                    "No se encontró un animal acuático con el ID: " + updatedAquatic.getId()
             );
         }
-        
+
         Aquatic existing = existingOpt.get();
         existing.setName(updatedAquatic.getName());
         existing.setWeightKg(updatedAquatic.getWeightKg());
         existing.setBirthDate(updatedAquatic.getBirthDate());
-        
+
         notificar();
 
     }

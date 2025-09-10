@@ -5,6 +5,7 @@
 package com.mycompany.zoo_animals.model;
 
 public class Habitat {
+
     private String name;
     private double areaM2; // superficie en metros cuadrados
     private String climate;

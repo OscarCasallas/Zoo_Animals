@@ -7,6 +7,7 @@ package com.mycompany.zoo_animals.model;
 import java.time.LocalDate;
 
 public abstract class Animal {
+
     private String id;
     private String name;
     private double weightKg;

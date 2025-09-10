@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
  *
  * @author santiagomanchola
  */
-public class GUIGetAerial extends javax.swing.JFrame implements IActualizable{
+public class GUIGetAerial extends javax.swing.JFrame implements IActualizable {
 
     private IAerialService aerialService;
 
@@ -32,8 +32,8 @@ public class GUIGetAerial extends javax.swing.JFrame implements IActualizable{
         }
         applyRightAlignment();
         adjustSizeToTable();
-        
-                //Me registro como observador
+
+        //Me registro como observador
         ((AerialService) aerialService).addObserver(this);
 
         // Cargo datos iniciales
@@ -100,13 +100,13 @@ public class GUIGetAerial extends javax.swing.JFrame implements IActualizable{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnClose)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 564, Short.MAX_VALUE)
                         .addComponent(btnList)))
                 .addContainerGap())
         );
@@ -114,15 +114,15 @@ public class GUIGetAerial extends javax.swing.JFrame implements IActualizable{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClose)
                     .addComponent(btnList))
-                .addContainerGap())
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
-    pack(); 
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListActionPerformed
@@ -133,7 +133,7 @@ public class GUIGetAerial extends javax.swing.JFrame implements IActualizable{
         dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 
-         @Override
+    @Override
     public void actualizar() {
         List<Aerial> aerials = aerialService.getAll();
         DefaultTableModel model = (DefaultTableModel) aerialTable.getModel();
@@ -151,7 +151,7 @@ public class GUIGetAerial extends javax.swing.JFrame implements IActualizable{
             });
         }
     }
-    
+
     private void adjustSizeToTable() {
         int totalWidth = 0;
         for (int i = 0; i < aerialTable.getColumnCount(); i++) {

@@ -14,7 +14,7 @@ public class GUIGetAquatic extends javax.swing.JFrame implements IActualizable {
         this.aquaticService = aquaticService;
         initComponents();
         setLocationRelativeTo(null);
-        
+
         //Me registro como observador
         ((AquaticService) aquaticService).addObserver(this);
 
@@ -80,7 +80,7 @@ public class GUIGetAquatic extends javax.swing.JFrame implements IActualizable {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnClose)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -91,8 +91,8 @@ public class GUIGetAquatic extends javax.swing.JFrame implements IActualizable {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClose)
                     .addComponent(btnList))
@@ -110,7 +110,7 @@ public class GUIGetAquatic extends javax.swing.JFrame implements IActualizable {
         actualizar();
     }//GEN-LAST:event_btnListActionPerformed
 
-     @Override
+    @Override
     public void actualizar() {
         List<Aquatic> aquatics = aquaticService.getAll();
         DefaultTableModel model = (DefaultTableModel) aquaticTable.getModel();

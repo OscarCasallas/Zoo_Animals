@@ -5,6 +5,8 @@
 package com.mycompany.zoo_animals.model;
 
 public interface ISwimmable {
-    void swim();           
-    double getMaxDepth();     
+
+    void swim();
+
+    double getMaxDepth();
 }

@@ -13,10 +13,16 @@ import java.util.Optional;
  * @author santiagomanchola
  */
 public interface IAerialService {
+
     void add(Aerial aerial);
+
     List<Aerial> getAll();
+
     Optional<Aerial> getById(String id);
+
     void deleteById(String id);
+
     void update(Aerial aerial);
+
     boolean existsById(String id);
 }

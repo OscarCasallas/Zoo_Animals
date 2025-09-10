@@ -13,10 +13,16 @@ import java.util.Optional;
  * @author santiagomanchola
  */
 public interface IAquaticService {
+
     void add(Aquatic aquatic);
+
     List<Aquatic> getAll();
+
     Optional<Aquatic> getById(String id);
+
     void deleteById(String id);
+
     void update(Aquatic aquatic);
+
     boolean existsById(String id);
 }

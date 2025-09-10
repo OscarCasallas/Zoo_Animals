@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.Optional;
 
 public class HabitatService implements IHabitatService {
-    
+
     // Singleton Pattern Implementation
     private static HabitatService instance;
     private final List<Habitat> habitats = new ArrayList<>();
-    
+
     // Constructor privado para evitar instanciación directa
     private HabitatService() {
         // Constructor privado
     }
-    
+
     // Método para obtener la única instancia (Thread-safe)
     public static synchronized HabitatService getInstance() {
         if (instance == null) {
@@ -23,7 +23,6 @@ public class HabitatService implements IHabitatService {
         }
         return instance;
     }
-
 
     @Override
     public void add(Habitat habitat) {

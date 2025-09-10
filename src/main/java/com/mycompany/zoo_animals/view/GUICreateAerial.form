@@ -95,7 +95,7 @@
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="habitatComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="37" max="32767" attributes="0"/>
+              <EmptySpace pref="42" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="closeBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="addBtn" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -133,12 +133,21 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="birthDateInput">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="birthDateInputActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="birthDatePickerBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="\ud83d\udcc5" containsInvalidXMLChars="true"/>
         <Property name="toolTipText" type="java.lang.String" value="Seleccionar fecha"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="birthDatePickerBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>

@@ -18,17 +18,10 @@ import javax.swing.text.PlainDocument;
  */
 public class GUICreateAerial extends javax.swing.JFrame {
 
-    @Override
-    public void setVisible(boolean b) {
-        if (b) {
-            refreshHabitats();
-        }
-        super.setVisible(b);
-    }
-
     private IAerialService aerialService;
     private IHabitatService habitatService;
     private java.util.List<com.mycompany.zoo_animals.model.Habitat> habitats;
+    private LocalDate selectedDate = null;
 
     /**
      * Creates new form GUICreateAerial
@@ -36,11 +29,14 @@ public class GUICreateAerial extends javax.swing.JFrame {
     public GUICreateAerial(IAerialService aerialService, IHabitatService habitatService) {
         this.aerialService = aerialService;
         this.habitatService = habitatService;
-        refreshHabitats();
         initComponents();
         setLocationRelativeTo(null);
         setupFieldValidations();
+        setupDatePicker();
+        updateDateField();
         widenForm();
+        setupDatePicker();
+        refreshHabitats();
     }
 
     private void refreshHabitats() {
@@ -67,6 +63,56 @@ public class GUICreateAerial extends javax.swing.JFrame {
         wingspanInput.setColumns(cols);
         habitatComboBox.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXXXXXXXX");
         pack();
+    }
+
+    @Override
+    public void setVisible(boolean b) {
+        if (b) {
+            refreshHabitats();
+            resetForm();
+        }
+        super.setVisible(b);
+    }
+
+    private void setupDatePicker() {
+        birthDateInput.setEditable(false);
+        birthDateInput.setFocusable(false);
+        birthDateInput.setBackground(java.awt.Color.WHITE);
+        birthDateInput.setToolTipText("Usa 📅 para elegir fecha");
+
+        java.awt.event.ActionListener[] listeners = birthDatePickerBtn.getActionListeners();
+        for (java.awt.event.ActionListener listener : listeners) {
+            birthDatePickerBtn.removeActionListener(listener);
+        }
+        birthDatePickerBtn.addActionListener(e -> openDatePicker());
+    }
+
+    private void openDatePicker() {
+        LocalDate picked = DatePickerUtil.pickDate(this, selectedDate != null ? selectedDate : LocalDate.now());
+        if (picked != null) {
+            selectedDate = picked;
+            updateDateField();
+        }
+    }
+
+    private void updateDateField() {
+        if (selectedDate != null) {
+            birthDateInput.setText(selectedDate.toString());
+        } else {
+            birthDateInput.setText("");
+        }
+    }
+
+    private void resetForm() {
+        selectedDate = null;
+        updateDateField();
+        idInput.setText("");
+        nameInput.setText("");
+        weightInput.setText("");
+        wingspanInput.setText("");
+        if (habitatComboBox != null) {
+            habitatComboBox.setSelectedIndex(0);
+        }
     }
 
     /**
@@ -105,14 +151,18 @@ public class GUICreateAerial extends javax.swing.JFrame {
 
         jLabel3.setText("Fecha de nacimiento");
 
+        birthDateInput.setEditable(false);
+        birthDateInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                birthDateInputActionPerformed(evt);
+            }
+        });
+
         birthDatePickerBtn.setText("📅");
         birthDatePickerBtn.setToolTipText("Seleccionar fecha");
-        birthDateInput.setEditable(false);
-        birthDateInput.setFocusable(false);
         birthDatePickerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                var chosen = DatePickerUtil.pickDate(GUICreateAerial.this, parseDateSafely(birthDateInput.getText()));
-                if (chosen != null) birthDateInput.setText(chosen.toString());
+                birthDatePickerBtnActionPerformed(evt);
             }
         });
 
@@ -195,7 +245,7 @@ public class GUICreateAerial extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(habitatComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(closeBtn)
                     .addComponent(addBtn))
@@ -223,6 +273,7 @@ public class GUICreateAerial extends javax.swing.JFrame {
     }//GEN-LAST:event_nameInputActionPerformed
 
     private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
+        resetForm();
         dispose();
     }//GEN-LAST:event_closeBtnActionPerformed
 
@@ -237,7 +288,7 @@ public class GUICreateAerial extends javax.swing.JFrame {
             Aerial aerial;
 
             if (id.isEmpty() || name.isEmpty() || weightInput.getText().trim().isEmpty()
-                    || birthDateInput.getText().trim().isEmpty() || wingspanInput.getText().trim().isEmpty()) {
+                    || selectedDate == null || wingspanInput.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -254,7 +305,7 @@ public class GUICreateAerial extends javax.swing.JFrame {
             }
 
             weight = Double.parseDouble(weightInput.getText().trim());
-            birthDate = LocalDate.parse(birthDateInput.getText().trim());
+            birthDate = selectedDate;
             wingspan = Double.parseDouble(wingspanInput.getText().trim());
 
             int sel = habitatComboBox.getSelectedIndex();
@@ -274,8 +325,8 @@ public class GUICreateAerial extends javax.swing.JFrame {
             weightInput.setText("");
             birthDateInput.setText("");
             wingspanInput.setText("");
-            // Reiniciar selección de hábitat a "Ninguno" (índice 0) para consistencia
             habitatComboBox.setSelectedIndex(0);
+            resetForm();
 
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(this, "Error en formato numérico. Verifica peso y envergadura.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -294,6 +345,14 @@ public class GUICreateAerial extends javax.swing.JFrame {
     private void climateInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_climateInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_climateInputActionPerformed
+
+    private void birthDateInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birthDateInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_birthDateInputActionPerformed
+
+    private void birthDatePickerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birthDatePickerBtnActionPerformed
+        birthDatePickerBtn.addActionListener(e -> openDatePicker());
+    }//GEN-LAST:event_birthDatePickerBtnActionPerformed
 
     private java.time.LocalDate parseDateSafely(String txt) {
         try {

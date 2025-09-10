@@ -2,11 +2,13 @@ package com.mycompany.zoo_animals.view;
 
 import com.mycompany.zoo_animals.model.Aquatic;
 import com.mycompany.zoo_animals.service.IAquaticService;
+import java.time.LocalDate;
 import javax.swing.text.PlainDocument;
 
 public class GUIEditAquatic extends javax.swing.JFrame {
 
     private IAquaticService aquaticService;
+    private LocalDate selectedDate = LocalDate.now();
 
     public GUIEditAquatic(IAquaticService aquaticService) {
         this.aquaticService = aquaticService;
@@ -14,6 +16,7 @@ public class GUIEditAquatic extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setFieldsEditable(false);
         setupFieldValidations();
+        setupDatePicker();
 
         inputSearch.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             @Override
@@ -33,6 +36,39 @@ public class GUIEditAquatic extends javax.swing.JFrame {
         });
     }
 
+    @Override
+    public void setVisible(boolean b) {
+        if (b) {
+            clearFields();
+        }
+        super.setVisible(b);
+    }
+
+    private void setupDatePicker() {
+        birthDateInput.setEditable(false);
+        birthDateInput.setFocusable(false);
+        birthDateInput.setBackground(java.awt.Color.WHITE);
+        birthDateInput.setToolTipText("Usa 📅 para elegir fecha");
+
+        java.awt.event.ActionListener[] listeners = birthDatePickerBtn.getActionListeners();
+        for (java.awt.event.ActionListener listener : listeners) {
+            birthDatePickerBtn.removeActionListener(listener);
+        }
+        birthDatePickerBtn.addActionListener(e -> openDatePicker());
+    }
+
+    private void openDatePicker() {
+        LocalDate picked = DatePickerUtil.pickDate(this, selectedDate);
+        if (picked != null) {
+            selectedDate = picked;
+            updateDateField();
+        }
+    }
+
+    private void updateDateField() {
+        birthDateInput.setText(selectedDate.toString());
+    }
+
     private void setFieldsEditable(boolean editable) {
         nameInput.setEditable(editable);
         nameInput.setFocusable(editable);
@@ -45,6 +81,8 @@ public class GUIEditAquatic extends javax.swing.JFrame {
 
         swimSpeedInput.setEditable(editable);
         swimSpeedInput.setFocusable(editable);
+
+        birthDatePickerBtn.setEnabled(editable);
     }
 
     @SuppressWarnings("unchecked")
@@ -150,9 +188,9 @@ public class GUIEditAquatic extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(inputSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
+                        .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnClose)
+                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEdit))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -255,7 +293,8 @@ public class GUIEditAquatic extends javax.swing.JFrame {
                 idInput.setText(aquatic.getId());
                 nameInput.setText(aquatic.getName());
                 weightInput.setText(String.valueOf(aquatic.getWeightKg()));
-                birthDateInput.setText(aquatic.getBirthDate().toString());
+                selectedDate = aquatic.getBirthDate(); // ← Cargar fecha del animal
+                updateDateField();
                 preferredFoodInput.setText(aquatic.getPreferredFood());
                 swimSpeedInput.setText(String.valueOf(aquatic.getSwimSpeedKmh()));
 
@@ -320,6 +359,8 @@ public class GUIEditAquatic extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditActionPerformed
     private void clearFields() {
+        selectedDate = LocalDate.now();
+        updateDateField();
         idInput.setText("");
         nameInput.setText("");
         weightInput.setText("");

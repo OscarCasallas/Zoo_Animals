@@ -9,13 +9,64 @@ import javax.swing.text.PlainDocument;
 public class GUICreateAquatic extends javax.swing.JFrame {
 
     private IAquaticService aquaticService;
+    private LocalDate selectedDate = null;
 
     public GUICreateAquatic(IAquaticService aquaticService) {
         this.aquaticService = aquaticService;
         initComponents();
         setLocationRelativeTo(null);
         setupFieldValidations();
+        setupDatePicker();
+        updateDateField();
         widenForm();
+        setupDatePicker();
+    }
+
+    @Override
+    public void setVisible(boolean b) {
+        if (b) {
+            resetForm();
+        }
+        super.setVisible(b);
+    }
+
+    private void setupDatePicker() {
+        birthDateInput.setEditable(false);
+        birthDateInput.setFocusable(false);
+        birthDateInput.setBackground(java.awt.Color.WHITE);
+        birthDateInput.setToolTipText("Usa 📅 para elegir fecha");
+
+        java.awt.event.ActionListener[] listeners = birthDatePickerBtn.getActionListeners();
+        for (java.awt.event.ActionListener listener : listeners) {
+            birthDatePickerBtn.removeActionListener(listener);
+        }
+        birthDatePickerBtn.addActionListener(e -> openDatePicker());
+    }
+
+    private void openDatePicker() {
+        LocalDate picked = DatePickerUtil.pickDate(this, selectedDate != null ? selectedDate : LocalDate.now());
+        if (picked != null) {
+            selectedDate = picked;
+            updateDateField();
+        }
+    }
+
+    private void updateDateField() {
+        if (selectedDate != null) {
+            birthDateInput.setText(selectedDate.toString());
+        } else {
+            birthDateInput.setText("");
+        }
+    }
+
+    private void resetForm() {
+        selectedDate = null;
+        updateDateField();
+        idInput.setText("");
+        nameInput.setText("");
+        weightInput.setText("");
+        preferredFoodInput.setText("");
+        swimSpeedInput.setText("");
     }
 
     @SuppressWarnings("unchecked")
@@ -60,8 +111,15 @@ public class GUICreateAquatic extends javax.swing.JFrame {
             }
         });
 
+        birthDateInput.setEditable(false);
+
         birthDatePickerBtn.setText("📅");
         birthDatePickerBtn.setToolTipText("Seleccionar fecha");
+        birthDatePickerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                birthDatePickerBtnActionPerformed(evt);
+            }
+        });
 
         swimSpeedInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,11 +157,11 @@ public class GUICreateAquatic extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(idLabel)
                             .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(weightInput, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                            .addComponent(idInput)
-                            .addComponent(nameInput)))
+                            .addComponent(weightInput, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                            .addComponent(nameInput)
+                            .addComponent(idInput, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -115,7 +173,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(swimSpeedInput)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(birthDateInput)
+                                .addComponent(birthDateInput, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(birthDatePickerBtn))
                             .addComponent(preferredFoodInput))))
@@ -150,7 +208,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(swimSpeedInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(closeBtn)
                     .addComponent(addBtn))
@@ -192,6 +250,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
     }//GEN-LAST:event_nameInputActionPerformed
 
     private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
+        resetForm();
         dispose();
     }//GEN-LAST:event_closeBtnActionPerformed
 
@@ -206,7 +265,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
             Aquatic aquatic;
 
             if (id.isEmpty() || name.isEmpty() || weightInput.getText().trim().isEmpty()
-                    || birthDateInput.getText().trim().isEmpty() || preferredFoodInput.getText().trim().isEmpty()
+                    || selectedDate == null || preferredFoodInput.getText().trim().isEmpty()
                     || swimSpeedInput.getText().trim().isEmpty()) {
 
                 JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -224,7 +283,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
             }
 
             weight = Double.parseDouble(weightInput.getText().trim());
-            birthDate = LocalDate.parse(birthDateInput.getText().trim());
+            birthDate = selectedDate;
             preferredFood = preferredFoodInput.getText().trim();
             swimSpeed = Double.parseDouble(swimSpeedInput.getText().trim());
 
@@ -241,6 +300,7 @@ public class GUICreateAquatic extends javax.swing.JFrame {
             birthDateInput.setText("");
             preferredFoodInput.setText("");
             swimSpeedInput.setText("");
+            resetForm();
 
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(this, "Error en formato numérico. Verifica peso y velocidad de nado.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -255,6 +315,10 @@ public class GUICreateAquatic extends javax.swing.JFrame {
     private void swimSpeedInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_swimSpeedInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_swimSpeedInputActionPerformed
+
+    private void birthDatePickerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birthDatePickerBtnActionPerformed
+        birthDatePickerBtn.addActionListener(e -> openDatePicker());
+    }//GEN-LAST:event_birthDatePickerBtnActionPerformed
 
     private java.time.LocalDate parseDateSafely(String txt) {
         try {
