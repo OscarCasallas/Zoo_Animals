@@ -1,6 +1,8 @@
 package com.mycompany.zoo_animals.view;
 
 import com.mycompany.zoo_animals.service.IAquaticService;
+import java.awt.Color;
+import java.awt.Font;
 
 public class GUIDeleteAquatic extends javax.swing.JFrame {
 
@@ -10,6 +12,7 @@ public class GUIDeleteAquatic extends javax.swing.JFrame {
         this.aquaticService = aquaticService;
         initComponents();
         setLocationRelativeTo(null);
+        styleComponents();
 
         searchInput.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             @Override
@@ -296,6 +299,26 @@ public class GUIDeleteAquatic extends javax.swing.JFrame {
     private void swimSpeedInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_swimSpeedInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_swimSpeedInputActionPerformed
+
+    private void styleComponents() {
+        Font base = idLabel.getFont();
+        Font bold = base.deriveFont(Font.BOLD);
+        idLabel.setFont(bold);
+        jLabel2.setFont(bold);
+        jLabel3.setFont(bold);
+        jLabel4.setFont(bold);
+        jLabel5.setFont(bold);
+
+        javax.swing.JTextField[] readOnly = {
+            idInput, nameInput, weightInput, birthDateInput, preferredFoodInput, swimSpeedInput
+        };
+        for (javax.swing.JTextField f : readOnly) {
+            f.setEnabled(true);
+            f.setEditable(false);
+            f.setBackground(Color.WHITE);
+            f.setDisabledTextColor(Color.BLACK);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField birthDateInput;
